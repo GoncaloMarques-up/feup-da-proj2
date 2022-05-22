@@ -851,7 +851,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "feup_dal_proj2"
+			"value" : "feup-dal-proj2"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1228,6 +1228,42 @@
 			],
 			"type" : "BOOL",
 			"value" : "FALSE"
+		},
+		{
+			"name" : "feup-dal-proj2_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/ASUS/Desktop/Rui/FACULDADE/FEUP/2o Ano/2o Semestre/DA/DA-Proj2/feup-dal-proj2/cmake-build-debug"
+		},
+		{
+			"name" : "feup-dal-proj2_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "feup-dal-proj2_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/ASUS/Desktop/Rui/FACULDADE/FEUP/2o Ano/2o Semestre/DA/DA-Proj2/feup-dal-proj2"
 		},
 		{
 			"name" : "feup_dal_proj2_BINARY_DIR",

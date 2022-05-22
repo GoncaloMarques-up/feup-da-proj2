@@ -1,0 +1,12 @@
+# ninja log v5
+1	636	6749469474561175	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+28	608	6749469997056998	CMakeFiles/feup-dal-proj2.dir/src/Menu.cpp.obj	5aa7e99677817d07
+6	736	6749469998313639	CMakeFiles/feup-dal-proj2.dir/src/Graph.cpp.obj	d315b29cffccf548
+737	1083	6749470001774706	feup-dal-proj2.exe	18e11500590143cc
+3	508	6749470304719509	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+3	417	6749470430202346	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+3	427	6749470929977668	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+3	481	6749471283784046	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+5	1197	6749471546416841	CMakeFiles/feup-dal-proj2.dir/main.cpp.obj	c398b9153bd1d2ce
+40	1277	6749471547356887	CMakeFiles/feup-dal-proj2.dir/src/Menu.cpp.obj	5aa7e99677817d07
+1278	1627	6749471550842245	feup-dal-proj2.exe	18e11500590143cc
