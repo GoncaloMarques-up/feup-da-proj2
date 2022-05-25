@@ -10,18 +10,18 @@ void Menu::run() {
 }
 
 void Menu::drawMainMenu() {
-    cout << "-------------- Design de Algoritmos - 2021/22 --------------" << endl;
-    cout << "1 - Cenarios" << endl;
-    cout << "2 - DevTeam" << endl;
-    cout << "3 - Escolha de ficheiros" << endl;
-    cout << "0 - Sair" << endl << endl;
+    std::cout << "-------------- Design de Algoritmos - 2021/22 --------------" << '\n';
+    std::cout << "1 - Cenarios" << '\n';
+    std::cout << "2 - DevTeam" << '\n';
+    std::cout << "3 - Escolha de ficheiros" << '\n';
+    std::cout << "0 - Sair" << "\n\n";
 }
 
 void Menu::mainMenu() {
     int input;
     do{
         drawMainMenu();
-        cin >> input;
+        std::cin >> input;
         switch (input) {
             case 1:
                 //cenarios();
@@ -40,29 +40,29 @@ void Menu::mainMenu() {
 }
 
 void Menu::drawDevTeam() {
-    cout << "----------------- DevTeam -----------------" << endl;
-    cout << "201905574 - David Marques" << endl;
-    cout << "202006874 - Goncalo Marques" << endl;
-    cout << "202103631 - Rui Soares" << endl << endl;
-    cout << "Selecione Qualquer Input para Voltar ao Menu Principal" << endl << endl;
+    std::cout << "----------------- DevTeam -----------------" << '\n';
+    std::cout << "201905574 - David Marques" << '\n';
+    std::cout << "202006874 - Goncalo Marques" << '\n';
+    std::cout << "202103631 - Rui Soares" << '\n' << '\n';
+    std::cout << "Selecione Qualquer Input para Voltar ao Menu Principal" << "\n\n";
 }
 
 void Menu::devTeam() {
     drawDevTeam();
-    string input;
-    cin >> input;
+    std::string input;
+    std::cin >> input;
 }
 
 void Menu::drawExit() {
-    cout << "Pretende Mesmo Sair?" << endl;
-    cout << "1 - Sim" << endl;
-    cout << "0 - Nao" << endl;
+    std::cout << "Pretende Mesmo Sair?" << '\n';
+    std::cout << "1 - Sim" << '\n';
+    std::cout << "0 - Nao" << '\n';
 }
 
 
 int Menu::exit() {
     drawExit();
     int input;
-    cin >> input;
+    std::cin >> input;
     return !input;
 }
