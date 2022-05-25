@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/goncalo/Desktop/DA/feup-dal-proj2/FileReader.cpp">
+			<Option target="feup-dal-proj2"/>
+		</Unit>
+		<Unit filename="/home/goncalo/Desktop/DA/feup-dal-proj2/FileReader.h">
+			<Option target="feup-dal-proj2"/>
+		</Unit>
 		<Unit filename="/home/goncalo/Desktop/DA/feup-dal-proj2/includes/Graph.h">
 			<Option target="feup-dal-proj2"/>
 		</Unit>

@@ -129,6 +129,30 @@ feup-dal-proj2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/feup-dal-proj2.dir/build.make CMakeFiles/feup-dal-proj2.dir/build
 .PHONY : feup-dal-proj2/fast
 
+FileReader.o: FileReader.cpp.o
+.PHONY : FileReader.o
+
+# target to build an object file
+FileReader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/feup-dal-proj2.dir/build.make CMakeFiles/feup-dal-proj2.dir/FileReader.cpp.o
+.PHONY : FileReader.cpp.o
+
+FileReader.i: FileReader.cpp.i
+.PHONY : FileReader.i
+
+# target to preprocess a source file
+FileReader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/feup-dal-proj2.dir/build.make CMakeFiles/feup-dal-proj2.dir/FileReader.cpp.i
+.PHONY : FileReader.cpp.i
+
+FileReader.s: FileReader.cpp.s
+.PHONY : FileReader.s
+
+# target to generate assembly for a file
+FileReader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/feup-dal-proj2.dir/build.make CMakeFiles/feup-dal-proj2.dir/FileReader.cpp.s
+.PHONY : FileReader.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... feup-dal-proj2"
+	@echo "... FileReader.o"
+	@echo "... FileReader.i"
+	@echo "... FileReader.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

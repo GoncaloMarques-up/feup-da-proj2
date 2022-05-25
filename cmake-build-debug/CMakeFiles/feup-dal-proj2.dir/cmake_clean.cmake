@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/feup-dal-proj2.dir/FileReader.cpp.o"
+  "CMakeFiles/feup-dal-proj2.dir/FileReader.cpp.o.d"
   "CMakeFiles/feup-dal-proj2.dir/main.cpp.o"
   "CMakeFiles/feup-dal-proj2.dir/main.cpp.o.d"
   "CMakeFiles/feup-dal-proj2.dir/src/Graph.cpp.o"
