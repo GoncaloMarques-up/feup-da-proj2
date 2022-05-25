@@ -4,9 +4,6 @@
 #include <vector>
 #include <list>
 #include <iostream>
-#include <float.h>
-
-using namespace std;
 
 class Graph {
     struct Edge {
@@ -26,7 +23,7 @@ class Graph {
     vector<Node> nodes;        // The list of nodes being represented
 
 public:
-    Graph(int nodes);
+    explicit Graph(int nodes);
 
     void addEdge(int src, int dest, double cap, double dur);
     void updateEdge(int src, int dest, double addCapacity, double addDuration);
