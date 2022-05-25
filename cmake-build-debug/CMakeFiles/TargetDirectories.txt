@@ -1,3 +1,0 @@
-/home/goncalo/Desktop/DA/feup-dal-proj2/cmake-build-debug/CMakeFiles/feup-dal-proj2.dir
-/home/goncalo/Desktop/DA/feup-dal-proj2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/goncalo/Desktop/DA/feup-dal-proj2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
