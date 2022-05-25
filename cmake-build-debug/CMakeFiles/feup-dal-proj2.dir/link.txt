@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/feup-dal-proj2.dir/main.cpp.o CMakeFiles/feup-dal-proj2.dir/src/Graph.cpp.o CMakeFiles/feup-dal-proj2.dir/src/Menu.cpp.o -o feup-dal-proj2 

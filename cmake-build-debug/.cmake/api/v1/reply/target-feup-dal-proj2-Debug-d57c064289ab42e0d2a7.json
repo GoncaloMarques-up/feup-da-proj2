@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "feup-dal-proj2.exe"
-		},
-		{
-			"path" : "feup-dal-proj2.pdb"
+			"path" : "feup-dal-proj2"
 		}
 	],
 	"backtrace" : 1,
@@ -70,16 +67,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "feup-dal-proj2",
-	"nameOnDisk" : "feup-dal-proj2.exe",
+	"nameOnDisk" : "feup-dal-proj2",
 	"paths" : 
 	{
 		"build" : ".",

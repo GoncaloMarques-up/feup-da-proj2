@@ -4,5 +4,4 @@
 
 #include "../includes/Graph.h"
 
-Graph::Graph(int num) : n(num), nodes(num+1) {
-}
+Graph::Graph(int num) : n(num), nodes(num+1) {}
