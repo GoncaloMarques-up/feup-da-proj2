@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <list>
+#include <queue>
 #include <iostream>
 
 class Graph {
@@ -31,6 +32,11 @@ public:
     int n;                      // Graph size (vertices are numbered from 1 to n)
     std::vector<Node> nodes;    // The list of nodes being represented
 
+    void cenarioDoisUm(int s, int t);
+
+    void resetGraph();
+    bool bfs(int s, int t);
+    int edmondsKarp(int s, int t);
 };
 
 

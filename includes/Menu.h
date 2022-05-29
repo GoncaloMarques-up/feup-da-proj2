@@ -9,7 +9,10 @@
 #include <string>
 #include <utility>
 
+#include "FileReader.h"
+
 class Menu {
+    Graph graph = static_cast<Graph>(0);
 
 public:
 
@@ -29,6 +32,36 @@ public:
     void mainMenu();
 
     /**
+    * draws the cenarios
+    */
+    static void drawCenarios();
+
+    /**
+     * the computation for cenarios
+     */
+    void cenarios();
+
+    /**
+    * draws the cenarios 1
+    */
+    static void drawCenarios1();
+
+    /**
+     * the computation for cenarios 1
+     */
+    void cenarios1();
+
+    /**
+    * draws the cenarios 2
+    */
+    static void drawCenarios2();
+
+    /**
+     * the computation for cenarios 2
+     */
+    void cenarios2();
+
+    /**
     * draws the dev team
     */
     static void drawDevTeam();
@@ -39,6 +72,16 @@ public:
     static void devTeam();
 
     /**
+    * draws file options
+    */
+    static void drawFileChooser();
+    /**
+     * the computation for the file chooser
+     */
+    void chooseFile();
+
+
+    /**
     * draws the exit
     */
     static void drawExit();
@@ -47,6 +90,7 @@ public:
      * the computation for the exit
      */
     static int exit();
+
 };
 
 
