@@ -15,12 +15,21 @@ Graph FileReader::readFile(const std::string& file) {
     int numNodes, numEdges;
     ss >> numNodes >> numEdges;
     Graph graph{numNodes};
+
+    for(int i = 0; i < numNodes; i++){
+        graph.indexNode(i);
+    }
     for(int i = 0; i < numEdges; i++){
         getline(fs, data);
-        ss.str(data);
+        ss.str("");
+        ss.clear();
+        ss << data;
         int origin, destination, capacity, duration;
-        ss >> origin >> destination >> capacity >> duration;
-        graph.addEdge(origin, destination, capacity, duration);
+        ss >> origin;
+        ss >> destination;
+        ss >> capacity;
+        ss >> duration;
+        graph.addEdge(origin-1, destination-1, capacity, duration);
     }
     return graph;
 }
