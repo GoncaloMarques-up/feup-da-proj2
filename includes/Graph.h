@@ -19,23 +19,26 @@ class Graph {
     struct Node {
         std::list<Edge> adj;     // The list of outgoing edges (to adjacent nodes)
         int dist;                // Distance to the Initial Node
-        int pred;                // Predecessor Node
+        int cap;                 // Capacity of a node(useful for 1.1 and 1.2)
+        std::vector<int> pred;                // Predecessor Nodes
+        int index;               // index of the Node in the vector
         bool visited;            // Has the node already been visited?
     };
+
+    int n;                      // Graph size (vertices are numbered from 1 to n)
+    std::vector<Node> nodes;    // The list of nodes being represented
 
 public:
     explicit Graph(int nodes);
 
     void addEdge(int src, int dest, int cap, int dur);
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
-
-    int n;                      // Graph size (vertices are numbered from 1 to n)
-    std::vector<Node> nodes;    // The list of nodes being represented
+    void indexNode(int index);
 
     void cenarioDoisUm(int s, int t);
 
     void resetGraph();
-    bool bfs(int s, int t);
+    bool bfs(int s, int t, const std::vector<std::vector<int>> &revGraph);
     int edmondsKarp(int s, int t);
 };
 

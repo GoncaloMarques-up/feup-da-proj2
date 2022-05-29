@@ -99,7 +99,7 @@ void Menu::drawCenarios2() {
 void Menu::cenarios2() {
     int input;
     do{
-        drawCenarios1();
+        drawCenarios2();
         std::cin >> input;
         switch (input) {
             case 1:
