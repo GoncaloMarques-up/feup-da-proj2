@@ -77,7 +77,7 @@ void Menu::cenarios1() {
         std::cin >> input;
         switch (input) {
             case 1:
-                //cenario1();
+                graph.maxCapacityPath();
                 break;
             case 2:
                 //cenario2();

@@ -19,17 +19,20 @@ void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
     }
 }
 
-void Graph::maxCapacityPath(int s, int t) {
+void Graph::maxCapacityPath() {
+    int src, sink;
+    std::cout << "Introduza a Paragem Inicial e a Final [1-" << n << "]\n";
+    std::cin >> src >> sink;
     for(auto &node : nodes){
         node.cap = 0;
-        node.pred = -1;
+        node.pred.push_back(-1);
     }
 
-    nodes[s-1].cap = INT_MAX;
+    nodes[src-1].cap = INT_MAX;
 
     std::priority_queue<Node, std::vector<Node> ,compareNodes> queue;
 
-    queue.push(nodes[s-1]);
+    queue.push(nodes[src-1]);
 
     while(!queue.empty()){
         Node node = queue.top();
@@ -39,29 +42,29 @@ void Graph::maxCapacityPath(int s, int t) {
             Node &dest = nodes[edge.dest];
             if(min > dest.cap){
                 dest.cap = min;
-                dest.pred = node.index;
+                dest.pred[0] = node.index;
                 queue.push(dest);
             }
         }
     }
 
     std::vector<int> v;
-    Node *node = &nodes[t-1];
-    while(node->pred != -1){
+    Node *node = &nodes[sink-1];
+    while(node->pred[0] != -1){
         v.push_back(node->index);
-        node = &nodes[node->pred];
+        node = &nodes[node->pred[0]];
     }
 
     v.push_back(node->index);
     std::reverse(v.begin(), v.end());
 
-    std::cout << "capacidade máxima: " << nodes[t-1].cap << '\n' << "encaminhamento: ";
+    std::cout << "Capacidade Maxima: " << nodes[sink-1].cap << '\n' << "Encaminhamento: ";
 
     for(int i = 0; i < v.size(); i++){
         if(i != v.size()-1)
             std::cout << v[i] + 1 << "->";
         else
-            std::cout << v[i]+1;
+            std::cout << v[i]+1 << "\n";
     }
 }
 

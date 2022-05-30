@@ -12,7 +12,7 @@
 #include "FileReader.h"
 
 class Menu {
-    Graph graph = static_cast<Graph>(0);
+    Graph graph = FileReader::readFile("ts01.txt");;
 
 public:
 
@@ -24,7 +24,7 @@ public:
     /**
      * draws the main menu
      */
-    static void drawMainMenu();
+    void drawMainMenu();
 
     /**
     * the computation for the main menu
@@ -34,7 +34,7 @@ public:
     /**
     * draws the cenarios
     */
-    static void drawCenarios();
+    void drawCenarios();
 
     /**
      * the computation for cenarios
@@ -44,7 +44,7 @@ public:
     /**
     * draws the cenarios 1
     */
-    static void drawCenarios1();
+    void drawCenarios1();
 
     /**
      * the computation for cenarios 1
@@ -54,7 +54,7 @@ public:
     /**
     * draws the cenarios 2
     */
-    static void drawCenarios2();
+    void drawCenarios2();
 
     /**
      * the computation for cenarios 2
@@ -64,17 +64,17 @@ public:
     /**
     * draws the dev team
     */
-    static void drawDevTeam();
+    void drawDevTeam();
 
     /**
      * the computation for the dev team
      */
-    static void devTeam();
+    void devTeam();
 
     /**
     * draws file options
     */
-    static void drawFileChooser();
+    void drawFileChooser();
     /**
      * the computation for the file chooser
      */
@@ -84,12 +84,12 @@ public:
     /**
     * draws the exit
     */
-    static void drawExit();
+    void drawExit();
 
     /**
      * the computation for the exit
      */
-    static int exit();
+    int exit();
 
 };
 

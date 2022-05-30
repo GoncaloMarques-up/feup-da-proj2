@@ -6,6 +6,7 @@
 #include <queue>
 #include <iostream>
 #include <climits>
+#include <algorithm>
 
 class Graph {
     struct Edge {
@@ -34,7 +35,7 @@ public:
 
     void addEdge(int src, int dest, int cap, int dur);
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
-    void maxCapacityPath(int s, int t);
+    void maxCapacityPath();
     void indexNode(int index);
 
     struct compareNodes {
