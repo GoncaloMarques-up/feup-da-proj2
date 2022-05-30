@@ -37,6 +37,7 @@ public:
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
     void maxCapacityPath(int s, int t);
     void indexNode(int index);
+    void cenarioDoisQuatro(int s, int t);
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){

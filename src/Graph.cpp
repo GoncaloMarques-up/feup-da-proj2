@@ -71,6 +71,23 @@ void Graph::indexNode(int index) {
     nodes[index].index = index;
 }
 
+void Graph::cenarioDoisQuatro(int s, int t) {
+    int time = 0;
+    int aux = t;
+    int org = nodes[t].pred;
+    while (org != s){
+        for (auto it : nodes[org].adj){
+            if (it.dest == aux){
+                time += it.dur;
+                break;
+            }
+        }
+        aux = org;
+        org = nodes[org].pred;
+    }
+    std::cout << "The group will get together in the destination " << time << " minutes after they leave";
+}
+
 
 
 
