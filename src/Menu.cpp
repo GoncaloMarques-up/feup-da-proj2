@@ -103,7 +103,7 @@ void Menu::cenarios2() {
         std::cin >> input;
         switch (input) {
             case 1:
-                graph.cenarioDoisUm(1, 4);
+                graph.cenarioDoisUm(1, 50);
                 break;
             case 2:
                 //cenario2();

@@ -75,7 +75,8 @@ void Graph::indexNode(int index) {
 
 void Graph::cenarioDoisUm(int s, int t) {
     resetGraph();
-    std::cout << "The Max Flow is: " << edmondsKarp(s-1,t-1) << std::endl;
+
+    edmondsKarp(s-1,t-1);
 
 }
 
@@ -84,9 +85,6 @@ int Graph::edmondsKarp(int s, int t){
 
     std::vector<std::vector<int>>resGraph;
     resGraph.resize(n, std::vector<int>(n));
-
-    std::vector<std::vector<int>>paths;
-    paths.resize(n, std::vector<int>(n));
 
     for(int i = 0; i<n; i++){
         for(auto e : nodes[i].adj){
@@ -108,15 +106,86 @@ int Graph::edmondsKarp(int s, int t){
         for (int j = t; j != s; j = nodes[j].pred.back()) {
             int i = nodes[j].pred.back();
             resGraph[i][j] -= pathFlow;
-            resGraph[j][i] += pathFlow;
+            resGraph[j][i] -= pathFlow;
         }
 
         // Add path flow to overall flow
         maxFlow += pathFlow;
     }
+    discoverPaths(s, t);
 
-
+    std::cout << "The Max Flow is: " << maxFlow << "\n\n";
     return maxFlow;
+}
+
+void Graph::discoverPaths(int s, int t){
+    std::vector<std::vector<int>>paths;
+    paths.resize(n, std::vector<int>(n));
+
+    for(Node &node : nodes){
+        std::set<int>s(node.pred.begin(), node.pred.end());
+        node.pred.assign(s.begin(), s.end());
+    }
+
+    std::queue<int> queue;
+    queue.push(t);
+    while(!queue.empty()){
+        int j = queue.front();
+        queue.pop();
+        for(int i : nodes[j].pred){
+            paths[i][j]++;
+            queue.push(i);
+        }
+    }
+
+    int count=0;
+    for(int i=1; i<n; i++){
+        count+=paths[0][i];
+    }
+
+    std::vector<std::vector<int>> oPaths;
+    oPaths.resize(count);
+    int a=0;
+    for(int i=0; i<n; i++){
+        while(paths[s][i]>0 and a<count){
+            oPaths[a].push_back(s);
+            if(i!=t){
+                paths[s][i]--;
+            }
+            oPaths[a].push_back(i);
+            findPath(i, t, a, paths, oPaths);
+            a++;
+        }
+    }
+
+    for(int i=0; i<count; i++){
+        std::cout << "Group " << i+1 << ": ";
+        for(auto node : oPaths[i]){
+            std::cout << node+1;
+            if(node==oPaths[i].back()){
+                std::cout << "\n";
+            }else{
+                std::cout << " -> ";
+            }
+        }
+    }
+}
+
+void Graph::findPath(int s, int t, int a, std::vector<std::vector<int>> &paths, std::vector<std::vector<int>> &oPaths){
+    bool seen=false;
+    if(s!=t){
+        for(int i=0; i<n and !seen; i++){
+            while (paths[s][i] > 0) {
+                oPaths[a].push_back(i);
+                findPath(i, t, a, paths, oPaths);
+                if(i==t) {
+                    break;
+                }
+                paths[s][i]--;
+                seen=true;
+            }
+        }
+    }
 }
 
 bool Graph::bfs(int s, int t, const std::vector<std::vector<int>> &resGraph){

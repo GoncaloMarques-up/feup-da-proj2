@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <queue>
+#include <set>
 #include <iostream>
 #include <climits>
 #include <algorithm>
@@ -49,6 +50,8 @@ public:
     void resetGraph();
     bool bfs(int s, int t, const std::vector<std::vector<int>> &revGraph);
     int edmondsKarp(int s, int t);
+    void findPath(int s, int t, int a, std::vector<std::vector<int>> &paths, std::vector<std::vector<int>> &oPaths);
+    void discoverPaths(int s, int t);
 };
 
 
