@@ -12,8 +12,8 @@
 #include "FileReader.h"
 
 class Menu {
-    Graph graph = FileReader::readFile("ts01.txt");;
-
+    Graph graph = FileReader::readFile("ts01_b.txt");;
+    int s, t;
 public:
 
     /**
@@ -91,6 +91,7 @@ public:
      */
     int exit();
 
+    void readInputNodes(int &s, int &t);
 };
 
 

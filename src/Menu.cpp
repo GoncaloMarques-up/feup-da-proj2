@@ -77,7 +77,8 @@ void Menu::cenarios1() {
         std::cin >> input;
         switch (input) {
             case 1:
-                graph.maxCapacityPath();
+                readInputNodes(s, t);
+                graph.maxCapacityPath(s, t);
                 break;
             case 2:
                 //cenario2();
@@ -102,14 +103,16 @@ void Menu::cenarios2() {
         drawCenarios2();
         std::cin >> input;
         switch (input) {
+
             case 1:
-                graph.cenarioDoisUm(1, 50);
+                //cenario2();
                 break;
             case 2:
                 //cenario2();
                 break;
             case 3:
-                //cenario2();
+                readInputNodes(s, t);
+                graph.cenario23(s, t);
                 break;
             case 4:
                 //cenario2();
@@ -151,7 +154,7 @@ void Menu::chooseFile() {
     switch (input) {
         case 1:
             pre="ts";
-            std::cout << "[1-1]\n";
+            std::cout << "[1-2]\n";
             break;
         case 2:
             pre="in";
@@ -160,9 +163,9 @@ void Menu::chooseFile() {
     }
     std::cin >> input;
     if(input<10)
-        file = pre + "0" + std::to_string(input) + ".txt";
+        file = pre + "0" + std::to_string(input) + "_b.txt";
     else
-        file = pre + std::to_string(input) + ".txt";
+        file = pre + std::to_string(input) + "_b.txt";
 
     graph = FileReader::readFile(file);
 }
@@ -180,4 +183,12 @@ int Menu::exit() {
     int input;
     std::cin >> input;
     return !input;
+}
+
+void Menu::readInputNodes(int &s, int &t) {
+    do{
+        std::cout << "Introduza a Paragem Inicial e a Final [1-" << graph.getN() << "]\n";
+        std::cin >> s;
+        std::cin >> t;
+    }while(s<=0 or s>graph.getN() or t<=0 or t>graph.getN());
 }
