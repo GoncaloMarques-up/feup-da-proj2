@@ -3,9 +3,11 @@
 
 #include <vector>
 #include <list>
+#include <queue>
+#include <set>
 #include <iostream>
 #include <climits>
-#include <queue>
+#include <algorithm>
 
 class Graph {
     struct Edge {
@@ -21,21 +23,25 @@ class Graph {
         std::list<Edge> adj;    // The list of outgoing edges (to adjacent nodes)
         int dist;               // Distance to the Initial Node
         int cap;                // Capacity of a node(useful for 1.1 and 1.2)
-        int pred;               // Predecessor Node
+        int pred;  // Predecessor Nodes
         int index;              // index of the Node in the vector
         bool visited;           // Has the node already been visited?
     };
 
-private:
-    int n;                      // Graph size (vertices are numbered from 1 to n)
-    std::vector<Node> nodes;    // The list of nodes being represented
+    int n;
 public:
+    int getN() const;
 
+private:
+    // Graph size (vertices are numbered from 1 to n)
+    std::vector<Node> nodes;   // The list of nodes being represented
+
+public:
     explicit Graph(int nodes);
 
     void addEdge(int src, int dest, int cap, int dur);
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
-    void maxCapacityPath(int s, int t);
+    void maxCapacityPath(int src, int sink);
     void indexNode(int index);
     void cenarioDoisQuatro(int s, int t);
 
@@ -44,6 +50,14 @@ public:
             return n1.cap < n2.cap;
         }
     };
+
+    void cenario23(int s, int t);
+
+    void resetGraph();
+    bool bfs(int s, int t, const std::vector<std::vector<int>> &revGraph);
+    int edmondsKarp(int s, int t);
+    void drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int>crtFlow);
+
 };
 
 

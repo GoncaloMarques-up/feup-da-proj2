@@ -9,8 +9,11 @@
 #include <string>
 #include <utility>
 
-class Menu {
+#include "FileReader.h"
 
+class Menu {
+    Graph graph = FileReader::readFile("ts01_b.txt");;
+    int s, t;
 public:
 
     /**
@@ -21,7 +24,7 @@ public:
     /**
      * draws the main menu
      */
-    static void drawMainMenu();
+    void drawMainMenu();
 
     /**
     * the computation for the main menu
@@ -29,24 +32,66 @@ public:
     void mainMenu();
 
     /**
+    * draws the cenarios
+    */
+    void drawCenarios();
+
+    /**
+     * the computation for cenarios
+     */
+    void cenarios();
+
+    /**
+    * draws the cenarios 1
+    */
+    void drawCenarios1();
+
+    /**
+     * the computation for cenarios 1
+     */
+    void cenarios1();
+
+    /**
+    * draws the cenarios 2
+    */
+    void drawCenarios2();
+
+    /**
+     * the computation for cenarios 2
+     */
+    void cenarios2();
+
+    /**
     * draws the dev team
     */
-    static void drawDevTeam();
+    void drawDevTeam();
 
     /**
      * the computation for the dev team
      */
-    static void devTeam();
+    void devTeam();
+
+    /**
+    * draws file options
+    */
+    void drawFileChooser();
+    /**
+     * the computation for the file chooser
+     */
+    void chooseFile();
+
 
     /**
     * draws the exit
     */
-    static void drawExit();
+    void drawExit();
 
     /**
      * the computation for the exit
      */
-    static int exit();
+    int exit();
+
+    void readInputNodes(int &s, int &t);
 };
 
 
