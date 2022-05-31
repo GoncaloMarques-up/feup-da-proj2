@@ -28,13 +28,9 @@ class Graph {
         bool visited;           // Has the node already been visited?
     };
 
-    int n;
-public:
-    int getN() const;
-
-private:
-    // Graph size (vertices are numbered from 1 to n)
-    std::vector<Node> nodes;   // The list of nodes being represented
+    int n;                                  // Graph size (vertices are numbered from 1 to n)
+    std::vector<Node> nodes;                // The list of nodes being represented
+    std::vector<std::vector<int>> paths;    // Paths from src to sink
 
 public:
     explicit Graph(int nodes);
@@ -56,8 +52,8 @@ public:
     void resetGraph();
     bool bfs(int src, int sink, const std::vector<std::vector<int>> &revGraph);
     int edmondsKarp(int src, int sink);
-    static void drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int>crtFlow);
-
+    void drawPaths();
+    int getN() const;
 };
 
 

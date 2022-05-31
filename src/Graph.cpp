@@ -97,28 +97,28 @@ void Graph::cenarioDoisQuatro(std::vector<std::vector<int>> v) {
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
-    if(!edmondsKarp(src-1,sink-1)){
+    paths.clear();
+    int maxFlow = edmondsKarp(src-1,sink-1);
+    if(!maxFlow){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
+    } else {
+        drawPaths();
+        std::cout << "Numero Maximo de Passageiros: " << maxFlow << "\n\n";
     }
 
 }
 
 int Graph::edmondsKarp(int src, int sink){
-    int maxFlow = 0;
+    int maxFlow = 0, pathNumber=0;
 
     std::vector<std::vector<int>>resGraph;
     resGraph.resize(n, std::vector<int>(n));
-
-    std::vector<std::vector<int>>paths;
-    std::vector<int>crtFlow;
 
     for(int i = 0; i<n; i++){
         for(auto e : nodes[i].adj){
             resGraph[i][e.dest] = e.cap;
         }
     }
-
-    int pathNumber=0;
 
     while(bfs(src, sink, resGraph)){
 
@@ -129,44 +129,40 @@ int Graph::edmondsKarp(int src, int sink){
         }
 
         std::vector<int> newPath;
+
         // update residual capacities of the edges and
         // reverse edges along the path
-
         for (int j = sink; j != src; j = nodes[j].pred) {
             int i = nodes[j].pred;
             resGraph[i][j] -= pathFlow;
-            resGraph[j][i] -= pathFlow;
+            resGraph[j][i] += pathFlow;
             newPath.push_back(j);
         }
         newPath.push_back(src);
+        newPath.push_back(pathFlow);
         paths.push_back(newPath);
-        pathNumber++;
 
         // Add path flow to overall flow
         maxFlow += pathFlow;
-        crtFlow.push_back(pathFlow);
     }
-    drawPaths(pathNumber, paths, crtFlow);
 
-    std::cout << "Numero Maximo de Passageiros: " << maxFlow << "\n\n";
+    for(auto & path : paths){
+        std::reverse(path.begin(), path.end());
+    }
+
     return maxFlow;
 }
 
-void Graph::drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int> crtFlow){
-    for(int i=0; i<nrPaths; i++){
-        std::reverse(paths[i].begin(), paths[i].end());
-    }
-
-    for(int i=0; i<nrPaths; i++){
+void Graph::drawPaths(){
+    for(int i=0; i<paths.size(); i++){
         std::cout << "Group " << i+1 << ": ";
-        for(auto node : paths[i]){
-            std::cout << node+1;
-            if(node==paths[i].back()){
-                std::cout << " | Tamanho do Grupo: " << crtFlow[i] <<"\n";
-            }else{
+        for(int j = 1; j< paths[i].size(); j++){
+            std::cout << paths[i][j]+1;
+            if(j != paths[i].size()-1){
                 std::cout << " -> ";
             }
         }
+        std::cout << " | Tamanho do Grupo: " << paths[i][0] <<"\n";
     }
 }
 
