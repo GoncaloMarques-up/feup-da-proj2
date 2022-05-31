@@ -97,19 +97,18 @@ void Graph::cenarioDoisQuatro(std::vector<std::vector<int>> v) {
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
-    paths.clear();
-    int maxFlow = edmondsKarp(src-1,sink-1);
+    maxFlow = 0;
+
+    maxFlow = edmondsKarp(src-1,sink-1);
     if(!maxFlow){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     } else {
         drawPaths();
         std::cout << "Numero Maximo de Passageiros: " << maxFlow << "\n\n";
     }
-
 }
 
 int Graph::edmondsKarp(int src, int sink){
-    int maxFlow = 0, pathNumber=0;
 
     std::vector<std::vector<int>>resGraph;
     resGraph.resize(n, std::vector<int>(n));
@@ -135,7 +134,7 @@ int Graph::edmondsKarp(int src, int sink){
         for (int j = sink; j != src; j = nodes[j].pred) {
             int i = nodes[j].pred;
             resGraph[i][j] -= pathFlow;
-            resGraph[j][i] += pathFlow;
+            /*resGraph[j][i] -= pathFlow;*/
             newPath.push_back(j);
         }
         newPath.push_back(src);
@@ -149,13 +148,14 @@ int Graph::edmondsKarp(int src, int sink){
     for(auto & path : paths){
         std::reverse(path.begin(), path.end());
     }
+    std::sort(paths.begin(), paths.end(), comparePaths);
 
     return maxFlow;
 }
 
 void Graph::drawPaths(){
     for(int i=0; i<paths.size(); i++){
-        std::cout << "Group " << i+1 << ": ";
+        std::cout << "Grupo " << i+1 << ": ";
         for(int j = 1; j< paths[i].size(); j++){
             std::cout << paths[i][j]+1;
             if(j != paths[i].size()-1){
@@ -195,8 +195,59 @@ void Graph::resetGraph() {
     for (int i=0; i<n; i++) {
         nodes[i].visited = false;
     }
+    paths.clear();
 }
 
 int Graph::getN() const {
     return n;
+}
+
+
+void Graph::cenario21(int src, int sink) {
+    resetGraph();
+    maxFlow = 0;
+
+    std::cout << "Introduza o Tamanho do Grupo\n";
+    std::cin >> groupSize;
+
+    maxFlow = edmondsKarp(src-1,sink-1);
+    if(!maxFlow) {
+        std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
+    }else if(maxFlow < groupSize){
+        std::cout << "O Grupo e Maior do que o Suportado. Nao ha Caminhos.\n\n";
+    } else {
+        drawPathsWithGroup(groupSize);
+    }
+}
+
+void Graph::cenario22() {
+    if(maxFlow==0){
+        std::cout << "Nenhum Caminho foi Selecionado\n\n";
+    }
+    else{
+        int increment;
+        std::cout << "Introduza o Quantas Pessoas se vao Juntar ao Grupo\n";
+        std::cin >> increment;
+        if(groupSize + increment > maxFlow)
+            std::cout << "O Numero de Passageiros Excede o Maximo Possivel\n";
+        else
+            drawPathsWithGroup(groupSize + increment);
+    }
+}
+
+void Graph::drawPathsWithGroup(int tamGrupo){
+    int i=0;
+    do{
+        std::cout << "Grupo " << i+1 << ": ";
+
+        for(int j = 1; j< paths[i].size(); j++){
+            std::cout << paths[i][j]+1;
+            if(j != paths[i].size()-1){
+                std::cout << " -> ";
+            }
+        }
+            std::cout << " | Tamanho do Grupo: " << tamGrupo + std::min(paths[i][0]-tamGrupo, 0) <<"\n";
+        tamGrupo -= paths[i][0];
+        i++;
+    }while(tamGrupo>0);
 }

@@ -105,10 +105,11 @@ void Menu::cenarios2() {
         switch (input) {
 
             case 1:
-                //cenario2();
+                readInputNodes();
+                graph.cenario21(src, sink);
                 break;
             case 2:
-                //cenario2();
+                graph.cenario22();
                 break;
             case 3:
                 readInputNodes();
