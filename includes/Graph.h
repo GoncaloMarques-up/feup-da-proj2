@@ -42,7 +42,10 @@ public:
     void addEdge(int src, int dest, int cap, int dur);
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
     void maxCapacityPath(int src, int sink);
+    void maxCapacityAndShortestPath(int src, int sink);
+    void cenario1_1Output(int src, int sink);
     void indexNode(int index);
+    bool cenario1Bfs(int src, int sink);
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){
