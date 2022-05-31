@@ -23,18 +23,16 @@ class Graph {
         std::list<Edge> adj;    // The list of outgoing edges (to adjacent nodes)
         int dist;               // Distance to the Initial Node
         int cap;                // Capacity of a node(useful for 1.1 and 1.2)
-        int pred;  // Predecessor Nodes
+        int pred;               // Predecessor Nodes
         int index;              // index of the Node in the vector
         bool visited;           // Has the node already been visited?
     };
 
-    int n;
-public:
-    int getN() const;
-
-private:
-    // Graph size (vertices are numbered from 1 to n)
-    std::vector<Node> nodes;   // The list of nodes being represented
+    int n;                                  // Graph size (vertices are numbered from 1 to n)
+    std::vector<Node> nodes;                // The list of nodes being represented
+    std::vector<std::vector<int>> paths;    // Paths from src to sink
+    int maxFlow;                            // Graph Max Flow
+    int groupSize;                          // Tamanho do Grupo
 
 public:
     explicit Graph(int nodes);
@@ -54,13 +52,22 @@ public:
         }
     };
 
+    static bool comparePaths(const std::vector<int> &a, std::vector<int> &b){
+        if(b[0] == a[0])
+            return a.size() < b.size();
+        return b[0] < a[0];
+    }
+
+    void cenario21(int src, int sink);
+    void cenario22();
     void cenario23(int src, int sink);
 
     void resetGraph();
     bool bfs(int src, int sink, const std::vector<std::vector<int>> &revGraph);
     int edmondsKarp(int src, int sink);
-    static void drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int>crtFlow);
-
+    void drawPaths();
+    void drawPathsWithGroup(int groupSize);
+    int getN() const;
 };
 
 
