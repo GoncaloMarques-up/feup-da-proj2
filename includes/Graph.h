@@ -46,6 +46,7 @@ public:
     void cenario1_1Output(int src, int sink);
     void indexNode(int index);
     bool cenario1Bfs(int src, int sink);
+    void cenarioDoisQuatro(std::vector<std::vector<int>> v);
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){

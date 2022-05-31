@@ -52,6 +52,31 @@ void Graph::indexNode(int index) {
     nodes[index].index = index;
 }
 
+void Graph::cenarioDoisQuatro(std::vector<std::vector<int>> v) {
+    std::vector<int> times;
+    for (auto it : v){
+        int time=0;
+        for (int i =0;i<it.size()-1;i++){
+            for (auto it2 : nodes[it[i]].adj){
+                if (it2.dest == it[i+1]){
+                    time += it2.dur;
+                    break;
+                }
+            }
+        }
+        times.push_back(time);
+    }
+
+    int min = times[0];
+    int max =times[0];
+
+    for (auto it : times){
+        if (it<min) min =it;
+        if (it>max) max =it;
+    }
+    std::cout << "The group will get together in the destination " << max-min << " minutes after they leave";
+}
+
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
