@@ -43,6 +43,7 @@ public:
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
     void maxCapacityPath(int src, int sink);
     void indexNode(int index);
+    void cenarioDoisQuatro(std::vector<std::vector<int>> v);
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){
