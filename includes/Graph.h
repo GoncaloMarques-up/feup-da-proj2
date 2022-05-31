@@ -50,12 +50,12 @@ public:
         }
     };
 
-    void cenario23(int s, int t);
+    void cenario23(int src, int sink);
 
     void resetGraph();
-    bool bfs(int s, int t, const std::vector<std::vector<int>> &revGraph);
-    int edmondsKarp(int s, int t);
-    void drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int>crtFlow);
+    bool bfs(int src, int sink, const std::vector<std::vector<int>> &revGraph);
+    int edmondsKarp(int src, int sink);
+    static void drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vector<int>crtFlow);
 
 };
 

@@ -13,7 +13,7 @@
 
 class Menu {
     Graph graph = FileReader::readFile("ts01_b.txt");;
-    int s, t;
+    int src{}, sink{};
 public:
 
     /**
@@ -24,7 +24,7 @@ public:
     /**
      * draws the main menu
      */
-    void drawMainMenu();
+    static void drawMainMenu();
 
     /**
     * the computation for the main menu
@@ -34,7 +34,7 @@ public:
     /**
     * draws the cenarios
     */
-    void drawCenarios();
+    static void drawCenarios();
 
     /**
      * the computation for cenarios
@@ -44,7 +44,7 @@ public:
     /**
     * draws the cenarios 1
     */
-    void drawCenarios1();
+    static void drawCenarios1();
 
     /**
      * the computation for cenarios 1
@@ -54,7 +54,7 @@ public:
     /**
     * draws the cenarios 2
     */
-    void drawCenarios2();
+    static void drawCenarios2();
 
     /**
      * the computation for cenarios 2
@@ -64,17 +64,17 @@ public:
     /**
     * draws the dev team
     */
-    void drawDevTeam();
+    static void drawDevTeam();
 
     /**
      * the computation for the dev team
      */
-    void devTeam();
+    static void devTeam();
 
     /**
     * draws file options
     */
-    void drawFileChooser();
+    static void drawFileChooser();
     /**
      * the computation for the file chooser
      */
@@ -84,14 +84,14 @@ public:
     /**
     * draws the exit
     */
-    void drawExit();
+    static void drawExit();
 
     /**
      * the computation for the exit
      */
-    int exit();
+    static int exit();
 
-    void readInputNodes(int &s, int &t);
+    void readInputNodes();
 };
 
 

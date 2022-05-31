@@ -70,15 +70,15 @@ void Graph::indexNode(int index) {
 }
 
 
-void Graph::cenario23(int s, int t) {
+void Graph::cenario23(int src, int sink) {
     resetGraph();
-    if(!edmondsKarp(s-1,t-1)){
+    if(!edmondsKarp(src-1,sink-1)){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     }
 
 }
 
-int Graph::edmondsKarp(int s, int t){
+int Graph::edmondsKarp(int src, int sink){
     int maxFlow = 0;
 
     std::vector<std::vector<int>>resGraph;
@@ -95,10 +95,10 @@ int Graph::edmondsKarp(int s, int t){
 
     int pathNumber=0;
 
-    while(bfs(s, t, resGraph)){
+    while(bfs(src, sink, resGraph)){
 
         int pathFlow = INT_MAX;
-        for (int j = t; j != s; j = nodes[j].pred) {
+        for (int j = sink; j != src; j = nodes[j].pred) {
             int i = nodes[j].pred;
             pathFlow = std::min(pathFlow, resGraph[i][j]);
         }
@@ -107,13 +107,13 @@ int Graph::edmondsKarp(int s, int t){
         // update residual capacities of the edges and
         // reverse edges along the path
 
-        for (int j = t; j != s; j = nodes[j].pred) {
+        for (int j = sink; j != src; j = nodes[j].pred) {
             int i = nodes[j].pred;
             resGraph[i][j] -= pathFlow;
             resGraph[j][i] -= pathFlow;
             newPath.push_back(j);
         }
-        newPath.push_back(s);
+        newPath.push_back(src);
         paths.push_back(newPath);
         pathNumber++;
 
@@ -145,10 +145,10 @@ void Graph::drawPaths(int nrPaths, std::vector<std::vector<int>>paths, std::vect
     }
 }
 
-bool Graph::bfs(int s, int t, const std::vector<std::vector<int>> &resGraph){
+bool Graph::bfs(int src, int sink, const std::vector<std::vector<int>> &resGraph){
     std::queue<int> q;
-    q.push(s);
-    nodes[s].visited = true;
+    q.push(src);
+    nodes[src].visited = true;
 
     while (!q.empty()) {
         int u = q.front();
@@ -156,13 +156,13 @@ bool Graph::bfs(int s, int t, const std::vector<std::vector<int>> &resGraph){
 
         for (int i = 0; i < n; i++) {
             if (!nodes[i].visited && resGraph[u][i] > 0) {
-                if (i == t) {
+                if (i == sink) {
                     nodes[i].pred = u;
                     return true;
                 }
                 q.push(i);
                 nodes[i].pred = u;
-                nodes[s].visited = true;
+                nodes[src].visited = true;
             }
         }
     }

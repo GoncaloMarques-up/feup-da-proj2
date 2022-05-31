@@ -77,8 +77,8 @@ void Menu::cenarios1() {
         std::cin >> input;
         switch (input) {
             case 1:
-                readInputNodes(s, t);
-                graph.maxCapacityPath(s, t);
+                readInputNodes();
+                graph.maxCapacityPath(src, sink);
                 break;
             case 2:
                 //cenario2();
@@ -111,8 +111,8 @@ void Menu::cenarios2() {
                 //cenario2();
                 break;
             case 3:
-                readInputNodes(s, t);
-                graph.cenario23(s, t);
+                readInputNodes();
+                graph.cenario23(src, sink);
                 break;
             case 4:
                 //cenario2();
@@ -185,10 +185,10 @@ int Menu::exit() {
     return !input;
 }
 
-void Menu::readInputNodes(int &s, int &t) {
+void Menu::readInputNodes() {
     do{
         std::cout << "Introduza a Paragem Inicial e a Final [1-" << graph.getN() << "]\n";
-        std::cin >> s;
-        std::cin >> t;
-    }while(s<=0 or s>graph.getN() or t<=0 or t>graph.getN());
+        std::cin >> src;
+        std::cin >> sink;
+    }while(src<=0 or src>graph.getN() or sink<=0 or sink>graph.getN());
 }
