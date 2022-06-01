@@ -119,18 +119,15 @@ std::vector<int> Graph::bfs25(Graph* g){
 }
 
 void Graph::cenario25() {
-    std::set<int> s;
-    for (auto it : paths){
-        for (int i = 1;i<it.size();i++){
-            s.insert(it[i]);
-        }
-    }
+    Graph* g = new Graph(this->n);
 
-    Graph* g = new Graph(s.size());
     for (auto it :paths){
-        for(int i =1;i<it.size();i++){
+        for(int i =1;i<it.size()-1;i++){
             for (auto it2 : nodes[it[i]].adj){
-                if (it2.dest == it[i+1]) g->addEdge(it[i],it[i+1],it2.cap,it2.dur);
+                if (it2.dest == it[i+1]){
+                    g->addEdge(it[i],it[i+1],it2.cap,it2.dur);
+                    break;
+                }
             }
         }
     }
