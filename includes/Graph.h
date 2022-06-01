@@ -26,6 +26,8 @@ class Graph {
         int pred;               // Predecessor Nodes
         int index;              // index of the Node in the vector
         bool visited;           // Has the node already been visited?
+        int tmax;               // Maximum time to get to the node
+        int tmin;               // Minimum time to get to the node
     };
 
     int n;                                  // Graph size (vertices are numbered from 1 to n)
@@ -44,7 +46,10 @@ public:
     void cenario1_1Output(int src, int sink);
     void indexNode(int index);
     bool cenario1Bfs(int src, int sink);
-    void cenarioDoisQuatro(std::vector<std::vector<int>> v);
+    void cenario24();
+    void cenario25();
+    int calcPathTime(std::vector<int> v);
+    std::vector<int> bfs25(Graph* g);
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){

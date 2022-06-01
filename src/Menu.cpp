@@ -118,7 +118,7 @@ void Menu::cenarios2() {
                 graph.cenario23(src, sink);
                 break;
             case 4:
-                //cenario2();
+                graph.cenario24();
                 break;
             case 5:
                 //cenario2();

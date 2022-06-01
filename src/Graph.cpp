@@ -52,19 +52,23 @@ void Graph::indexNode(int index) {
     nodes[index].index = index;
 }
 
-void Graph::cenarioDoisQuatro(std::vector<std::vector<int>> v) {
-    std::vector<int> times;
-    for (auto it : v){
-        int time=0;
-        for (int i =0;i<it.size()-1;i++){
-            for (auto it2 : nodes[it[i]].adj){
-                if (it2.dest == it[i+1]){
-                    time += it2.dur;
-                    break;
-                }
+int Graph::calcPathTime(std::vector<int> v) {
+    int time=0;
+    for (int i =0;i<v.size()-1;i++){
+        for (auto it2 : nodes[v[i]].adj){
+            if (it2.dest == v[i+1]){
+                time += it2.dur;
+                break;
             }
         }
-        times.push_back(time);
+    }
+    return time;
+}
+
+void Graph::cenario24() {
+    std::vector<int> times;
+    for (auto it : paths){
+        times.push_back(calcPathTime(it));
     }
 
     int min = times[0];
@@ -74,7 +78,75 @@ void Graph::cenarioDoisQuatro(std::vector<std::vector<int>> v) {
         if (it<min) min =it;
         if (it>max) max =it;
     }
-    std::cout << "The group will get together in the destination " << max-min << " minutes after they leave";
+    int res = max-min;
+    std::cout << "The group will get together in the destination " << res << " minutes after they leave";
+}
+
+std::vector<int> Graph::bfs25(Graph* g){
+    for (auto &it : g->nodes){
+        it.tmin = 0;
+        it.tmax = 0;
+    }
+    std::queue<int> q;
+    q.push(0);
+    g->nodes[0].visited = true;
+
+    for (int u =0;u<g->nodes.size();u++) {
+        for (auto it : g->nodes[u].adj){
+            if (g->nodes[it.dest].tmax == 0){
+                g->nodes[it.dest].tmax = it.dur+g->nodes[u].tmax;
+                g->nodes[it.dest].tmin = it.dur+g->nodes[u].tmin;
+            }else{
+                if (it.dur+g->nodes[u].tmax>g->nodes[it.dest].tmax) g->nodes[it.dest].tmax = it.dur+g->nodes[u].tmax;
+                if (it.dur+g->nodes[u].tmin<g->nodes[it.dest].tmin) g->nodes[it.dest].tmin = it.dur+g->nodes[u].tmin;
+            }
+        }
+    }
+
+    int time = INT_MIN;
+    for (auto it :g->nodes){
+        if (it.tmax-it.tmin > time) time = it.tmax-it.tmin;
+    }
+    std::vector<int> v;
+    for (int i =0;i<g->nodes.size();i++){
+        if (g->nodes[i].tmax-g->nodes[i].tmin == time) v.push_back(i);
+    }
+
+    return v;
+}
+
+void Graph::cenario25() {
+    std::set<int> s;
+    for (auto it : paths){
+        for (auto it2 :it){
+            s.insert(it2);
+        }
+    }
+    std::vector<int> v;
+    for (auto it :s){
+        v.push_back(it);
+    }
+
+    Graph* g = new Graph(v.size());
+
+    for (int i = 0;i<v.size();i++){
+        for (auto it2 : nodes[v[i]].adj){
+            for (int j =0;j<v.size();j++){
+                if (it2.dest == v[j]){
+                    g->addEdge(i,j,it2.cap,it2.dur);
+                }
+            }
+        }
+    }
+
+    std::vector<int> res = bfs25(g);
+
+    std::cout << "the nodes are: ";
+
+    for (auto it : res){
+        std::cout << v[it];
+    }
+
 }
 
 
