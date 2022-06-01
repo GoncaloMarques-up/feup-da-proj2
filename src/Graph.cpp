@@ -84,22 +84,23 @@ void Graph::cenario24() {
 
 std::vector<int> Graph::bfs25(Graph* g){
     for (auto &it : g->nodes){
-        it.tmin = 0;
-        it.tmax = 0;
+        it.tmin = INT_MAX;
+        it.tmax = INT_MIN;
     }
-    std::queue<int> q;
-    q.push(0);
-    g->nodes[0].visited = true;
+    g->nodes[0].tmin = 0;
+    g->nodes[0].tmax = 0;
 
-    for (int u =0;u<g->nodes.size();u++) {
-        for (auto it : g->nodes[u].adj){
-            if (g->nodes[it.dest].tmax == 0){
-                g->nodes[it.dest].tmax = it.dur+g->nodes[u].tmax;
-                g->nodes[it.dest].tmin = it.dur+g->nodes[u].tmin;
-            }else{
-                if (it.dur+g->nodes[u].tmax>g->nodes[it.dest].tmax) g->nodes[it.dest].tmax = it.dur+g->nodes[u].tmax;
-                if (it.dur+g->nodes[u].tmin<g->nodes[it.dest].tmin) g->nodes[it.dest].tmin = it.dur+g->nodes[u].tmin;
+    for (int i =0;i<g->nodes.size()-1;i++){
+        for (auto it :g->nodes[i].adj){
+            int tmax = g->nodes[i].tmax+it.dur;
+            int tmin = g->nodes[i].tmin+it.dur;
+            if (tmax > g->nodes[it.dest].tmax){
+                g->nodes[it.dest].tmax = tmax;
             }
+            if (tmin < g->nodes[it.dest].tmin){
+                g->nodes[it.dest].tmin = tmin;
+            }
+
         }
     }
 
@@ -109,7 +110,9 @@ std::vector<int> Graph::bfs25(Graph* g){
     }
     std::vector<int> v;
     for (int i =0;i<g->nodes.size();i++){
-        if (g->nodes[i].tmax-g->nodes[i].tmin == time) v.push_back(i);
+        if (g->nodes[i].tmax-g->nodes[i].tmin == time){
+            v.push_back(i);
+        }
     }
 
     return v;
@@ -122,19 +125,12 @@ void Graph::cenario25() {
             s.insert(it[i]);
         }
     }
-    std::vector<int> v;
-    for (auto it :s){
-        v.push_back(it);
-    }
 
-    Graph* g = new Graph(v.size());
-
-    for (int i = 0;i<v.size();i++){
-        for (auto it2 : nodes[v[i]].adj){
-            for (int j =0;j<v.size();j++){
-                if (it2.dest == v[j]){
-                    g->addEdge(i,j,it2.cap,it2.dur);
-                }
+    Graph* g = new Graph(s.size());
+    for (auto it :paths){
+        for(int i =1;i<it.size();i++){
+            for (auto it2 : nodes[it[i]].adj){
+                if (it2.dest == it[i+1]) g->addEdge(it[i],it[i+1],it2.cap,it2.dur);
             }
         }
     }
@@ -144,7 +140,7 @@ void Graph::cenario25() {
     std::cout << "The nodes where one group will wail the maximum time are: ";
 
     for (auto it : res){
-        std::cout << v[it] << " ";
+        std::cout << it+1 << " ";
     }
 
     std::cout << "\n";
