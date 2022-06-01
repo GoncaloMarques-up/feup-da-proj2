@@ -54,7 +54,7 @@ void Graph::indexNode(int index) {
 
 int Graph::calcPathTime(std::vector<int> v) {
     int time=0;
-    for (int i =0;i<v.size()-1;i++){
+    for (int i =1;i<v.size()-1;i++){
         for (auto it2 : nodes[v[i]].adj){
             if (it2.dest == v[i+1]){
                 time += it2.dur;
@@ -79,7 +79,7 @@ void Graph::cenario24() {
         if (it>max) max =it;
     }
     int res = max-min;
-    std::cout << "The group will get together in the destination " << res << " minutes after they leave";
+    std::cout << "The last group arrive at the destination " << res << " minutes after the first \n";
 }
 
 std::vector<int> Graph::bfs25(Graph* g){
@@ -118,8 +118,8 @@ std::vector<int> Graph::bfs25(Graph* g){
 void Graph::cenario25() {
     std::set<int> s;
     for (auto it : paths){
-        for (auto it2 :it){
-            s.insert(it2);
+        for (int i = 1;i<it.size();i++){
+            s.insert(it[i]);
         }
     }
     std::vector<int> v;
@@ -141,11 +141,13 @@ void Graph::cenario25() {
 
     std::vector<int> res = bfs25(g);
 
-    std::cout << "the nodes are: ";
+    std::cout << "The nodes where one group will wail the maximum time are: ";
 
     for (auto it : res){
-        std::cout << v[it];
+        std::cout << v[it] << " ";
     }
+
+    std::cout << "\n";
 
 }
 
