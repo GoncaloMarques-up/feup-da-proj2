@@ -191,7 +191,7 @@ void Graph::cenario21(int src, int sink) {
     src21 = src-1; sink21 = sink-1;
 
     edmondsKarp(src-1,sink-1);
-    if(!maxFlow) {
+    if(!maxFlow or !groupSize) {
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     }else if(maxFlow < groupSize){
         std::cout << "O Grupo e Maior do que o Suportado. Nao ha Caminhos.\n\n";
