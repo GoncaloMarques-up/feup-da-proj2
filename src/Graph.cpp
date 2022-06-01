@@ -201,7 +201,7 @@ void Graph::cenario21(int src, int sink) {
 }
 
 void Graph::cenario22() {
-    if(maxFlow==0){
+    if(maxFlow==0 or groupSize ==0){
         std::cout << "Nenhum Caminho foi Selecionado\n\n";
     }
     else{
