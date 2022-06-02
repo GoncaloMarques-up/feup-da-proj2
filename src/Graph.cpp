@@ -85,16 +85,17 @@ void Graph::cenario24() {
 
 std::vector<int> Graph::bfs25(Graph* g){
     for (auto &it : g->nodes){
-        it.tmin = INT_MAX;
-        it.tmax = INT_MIN;
+        it.tmin = 0;
+        it.tmax = 0;
     }
-    g->nodes[0].tmin = 0;
-    g->nodes[0].tmax = 0;
 
     for (int i =0;i<g->nodes.size()-1;i++){
+
         for (auto it :g->nodes[i].adj){
             int tmax = g->nodes[i].tmax+it.dur;
             int tmin = g->nodes[i].tmin+it.dur;
+            if (g->nodes[it.dest].tmin == 0) g->nodes[it.dest].tmin = tmin;
+            if (g->nodes[it.dest].tmax == 0) g->nodes[it.dest].tmax = tmax;
             if (tmax > g->nodes[it.dest].tmax){
                 g->nodes[it.dest].tmax = tmax;
             }
