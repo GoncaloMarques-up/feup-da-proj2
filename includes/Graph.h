@@ -51,6 +51,10 @@ public:
     int calcPathTime(std::vector<int> v);
     std::vector<int> bfs25(Graph* g);
 
+    void setPaths(std::vector<std::vector<int>> v){
+        paths = v;
+    }
+
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){
             return n1.cap < n2.cap;

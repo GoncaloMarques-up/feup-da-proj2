@@ -62,6 +62,7 @@ int Graph::calcPathTime(std::vector<int> v) {
             }
         }
     }
+    std::cout << time << "\n";
     return time;
 }
 
