@@ -32,24 +32,26 @@ class Graph {
 
     int n;                                  // Graph size (vertices are numbered from 1 to n)
     std::vector<Node> nodes;                // The list of nodes being represented
+    std::vector<std::vector<int>>resGraph;  // Residual Graph
     std::vector<std::vector<int>> paths;    // Paths from src to sink
     int maxFlow;                            // Graph Max Flow
     int groupSize;                          // Tamanho do Grupo
+
+    int src21;                              // Most Recent Source Node from 2.1
+    int sink21;                             // Most Recent Sink Node from 2.1
 
 public:
     explicit Graph(int nodes);
 
     void addEdge(int src, int dest, int cap, int dur);
     void updateEdge(int src, int dest, int addCapacity, int addDuration);
+
     void maxCapacityPath(int src, int sink);
     void maxCapacityAndShortestPath(int src, int sink);
     void cenario1_1Output(int src, int sink);
     void indexNode(int index);
     bool cenario1Bfs(int src, int sink);
-    void cenario24();
-    void cenario25();
-    int calcPathTime(std::vector<int> v);
-    std::vector<int> bfs25(Graph* g);
+
 
     struct compareNodes {
         bool operator()(const Node& n1, const Node& n2){
@@ -57,19 +59,25 @@ public:
         }
     };
 
+    void cenario21(int src, int sink);
+    void cenario22();
+    void cenario23(int src, int sink);
+    bool bfs(int src, int sink);
+    void edmondsKarp(int src, int sink);
+
     static bool comparePaths(const std::vector<int> &a, std::vector<int> &b){
         if(b[0] == a[0])
             return a.size() < b.size();
         return b[0] < a[0];
     }
 
-    void cenario21(int src, int sink);
-    void cenario22();
-    void cenario23(int src, int sink);
+    void cenario24();
+    void cenario25();
+    int calcPathTime(std::vector<int> v);
+    std::vector<int> bfs25(Graph* g);
 
     void resetGraph();
-    bool bfs(int src, int sink, const std::vector<std::vector<int>> &revGraph);
-    int edmondsKarp(int src, int sink);
+    void resetResGraph();
     void drawPaths();
     void drawPathsWithGroup(int groupSize);
     int getN() const;
