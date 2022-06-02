@@ -157,7 +157,7 @@ void Menu::chooseFile() {
     switch (input) {
         case 1:
             pre="ts";
-            std::cout << "[1-2]\n";
+            std::cout << "[1-3]\n";
             break;
         case 2:
             pre="in";

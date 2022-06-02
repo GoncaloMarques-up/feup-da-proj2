@@ -12,7 +12,7 @@ void Graph::addEdge(int src, int dest, int cap, int dur) {
 }
 
 void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
-    for(auto e: nodes[src].adj){
+    for(Edge e: nodes[src].adj){
         if(e.dest == dest){
             e.crtCap += addCapacity;
             e.crtDur += addDuration;
@@ -21,7 +21,7 @@ void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
 }
 
 void Graph::maxCapacityPath(int src, int sink) {
-    for(auto &node : nodes){
+    for(Node &node : nodes){
         node.cap = 0;
         node.pred = -1;
     }
@@ -132,7 +132,7 @@ void Graph::indexNode(int index) {
 }
 
 bool Graph::cenario1Bfs(int src, int sink) {
-    for(auto &node : nodes){
+    for(Node &node : nodes){
         node.cap = 0;
     }
 
@@ -145,7 +145,7 @@ bool Graph::cenario1Bfs(int src, int sink) {
     while (!queue.empty()){
         Node node = queue.front();
         queue.pop();
-        for(auto edge : node.adj){
+        for(Edge edge : node.adj){
             int min = std::min(node.cap, edge.cap);
             Node &dest = nodes[edge.dest];
             if(!dest.visited){
@@ -314,7 +314,7 @@ void Graph::edmondsKarp(int src, int sink){
 }
 
 int Graph::bfs(int src, int sink){
-    for(auto &node : nodes){
+    for(Node &node : nodes){
         node.visited= false;
     }
     std::queue<std::pair<int, int>> q;
@@ -429,7 +429,7 @@ void Graph::resetResGraph(){
     resGraph.clear();
     resGraph.resize(n, std::vector<int>(n));
     for(int i = 0; i<n; i++){
-        for(auto e : nodes[i].adj){
+        for(Edge e : nodes[i].adj){
             resGraph[i][e.dest] = e.cap;
         }
     }
