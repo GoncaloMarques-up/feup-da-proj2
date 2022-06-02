@@ -287,26 +287,21 @@ void Graph::cenario25() {
 }
 
 void Graph::edmondsKarp(int src, int sink){
+    int pathFlow;
 
-    while(bfs(src, sink) and maxFlow < groupSize){
-
-        int pathFlow = INT_MAX;
-        for (int j = sink; j != src; j = nodes[j].pred) {
-            int i = nodes[j].pred;
-            pathFlow = std::min(pathFlow, resGraph[i][j]);
-            if(pathFlow==1){
-                break;
-            }
-        }
+    while((pathFlow = bfs(src, sink)) and maxFlow < groupSize){
 
         std::vector<int> newPath;
 
-        for (int j = sink; j != src; j = nodes[j].pred) {
-            int i = nodes[j].pred;
-            resGraph[i][j] -= pathFlow;
-            resGraph[j][i] += pathFlow;
-            newPath.push_back(j);
+        int cur = sink;
+        while (cur != src) {
+            int prev = nodes[cur].pred;
+            resGraph[prev][cur] -= pathFlow;
+            resGraph[cur][prev] += pathFlow;
+            newPath.push_back(cur);
+            cur = prev;
         }
+
         newPath.push_back(src);
         newPath.push_back(pathFlow);
         std::reverse(newPath.begin(), newPath.end());
@@ -318,24 +313,26 @@ void Graph::edmondsKarp(int src, int sink){
     std::sort(paths.begin(), paths.end(), comparePaths);
 }
 
-bool Graph::bfs(int src, int sink){
+int Graph::bfs(int src, int sink){
     for(auto &node : nodes){
         node.visited= false;
     }
-    std::queue<int> q;
-    q.push(src);
+    std::queue<std::pair<int, int>> q;
     nodes[src].visited = true;
+    q.push({src, INT_MAX});
 
     while (!q.empty()) {
-        int u = q.front();
+        int cur = q.front().first;
+        int flow = q.front().second;
         q.pop();
 
-        for (int i = 0; i < n; i++) {
-            if (!nodes[i].visited && resGraph[u][i] > 0) {
-                nodes[i].pred = u;
-                if (i == sink) return true;
-                q.push(i);
-                nodes[u].visited = true;
+        for (Edge edge: nodes[cur].adj) {
+            if (!nodes[edge.dest].visited && resGraph[cur][edge.dest]) {
+                nodes[edge.dest].pred = cur;
+                int newFlow = std::min(flow, resGraph[cur][edge.dest]);
+                if (edge.dest == sink) return newFlow;
+                q.push({edge.dest, newFlow});
+                nodes[edge.dest].visited = true;
             }
         }
     }

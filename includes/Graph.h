@@ -62,7 +62,7 @@ public:
     void cenario21(int src, int sink);
     void cenario22();
     void cenario23(int src, int sink);
-    bool bfs(int src, int sink);
+    int bfs(int src, int sink);
     void edmondsKarp(int src, int sink);
 
     static bool comparePaths(const std::vector<int> &a, std::vector<int> &b){
