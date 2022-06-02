@@ -319,7 +319,7 @@ void Graph::edmondsKarp(int src, int sink){
 }
 
 bool Graph::bfs(int src, int sink){
-    for(auto node : nodes){
+    for(auto &node : nodes){
         node.visited= false;
     }
     std::queue<int> q;
@@ -332,12 +332,9 @@ bool Graph::bfs(int src, int sink){
 
         for (int i = 0; i < n; i++) {
             if (!nodes[i].visited && resGraph[u][i] > 0) {
-                if (i == sink) {
-                    nodes[i].pred = u;
-                    return true;
-                }
-                q.push(i);
                 nodes[i].pred = u;
+                if (i == sink) return true;
+                q.push(i);
                 nodes[u].visited = true;
             }
         }
