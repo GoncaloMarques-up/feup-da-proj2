@@ -226,7 +226,6 @@ void Graph::cenario23(int src, int sink) {
 
     groupSize = INT_MAX;
     edmondsKarp(src-1,sink-1);
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end-start);
     if(!maxFlow){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     } else {
