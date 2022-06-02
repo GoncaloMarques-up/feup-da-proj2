@@ -2,6 +2,7 @@
 // Created by ASUS on 22/05/2022.
 //
 
+#include <chrono>
 #include "../includes/Graph.h"
 
 Graph::Graph(int num) : n(num), nodes(num) {}
@@ -190,7 +191,7 @@ void Graph::cenario21(int src, int sink) {
     std::cin >> groupSize;
     src21 = src-1; sink21 = sink-1;
 
-    edmondsKarp(src-1,sink-1);
+    edmondsKarp(src21,sink21);
     if(!maxFlow or !groupSize) {
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     }else if(maxFlow < groupSize){
@@ -225,6 +226,7 @@ void Graph::cenario23(int src, int sink) {
 
     groupSize = INT_MAX;
     edmondsKarp(src-1,sink-1);
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(end-start);
     if(!maxFlow){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     } else {
@@ -293,6 +295,9 @@ void Graph::edmondsKarp(int src, int sink){
         for (int j = sink; j != src; j = nodes[j].pred) {
             int i = nodes[j].pred;
             pathFlow = std::min(pathFlow, resGraph[i][j]);
+            if(pathFlow==1){
+                break;
+            }
         }
 
         std::vector<int> newPath;
@@ -315,6 +320,9 @@ void Graph::edmondsKarp(int src, int sink){
 }
 
 bool Graph::bfs(int src, int sink){
+    for(auto node : nodes){
+        node.visited= false;
+    }
     std::queue<int> q;
     q.push(src);
     nodes[src].visited = true;
@@ -331,7 +339,7 @@ bool Graph::bfs(int src, int sink){
                 }
                 q.push(i);
                 nodes[i].pred = u;
-                nodes[src].visited = true;
+                nodes[u].visited = true;
             }
         }
     }
