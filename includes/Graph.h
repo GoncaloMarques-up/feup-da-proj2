@@ -85,7 +85,7 @@ public:
     void cenario24();
     void cenario25();
     int calcPathTime(std::vector<int> v);
-    std::vector<int> bfs25(Graph* g);
+    std::vector<int> cmp_arco_atividade(Graph* g);
 
     void resetGraph();
     void resetResGraph();

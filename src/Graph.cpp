@@ -47,6 +47,7 @@ void Graph::maxCapacityPath(int src, int sink) {
     }
 }
 
+
 void Graph::maxCapacityAndShortestPath(int src, int sink) {
     if(cenario1Bfs(src, sink)){
         int bfsCap = nodes[sink-1].cap;
@@ -266,7 +267,7 @@ void Graph::cenario25() {
         }
     }
 
-    std::vector<int> res = bfs25(g);
+    std::vector<int> res = cmp_arco_atividade(g);
 
     std::cout << "The nodes where one group will wail the maximum time are: ";
 
@@ -375,7 +376,7 @@ int Graph::calcPathTime(std::vector<int> v) {
     return time;
 }
 
-std::vector<int> Graph::bfs25(Graph* g){
+std::vector<int> Graph::cmp_arco_atividade(Graph* g){
 
     for (auto &it : g->nodes){
         it.es = 0;
@@ -476,7 +477,6 @@ std::vector<int> Graph::bfs25(Graph* g){
     return v;
 }
 
-
 void Graph::resetGraph() {
     for (int i=0; i<n; i++) {
         nodes[i].visited = false;
@@ -499,5 +499,3 @@ void Graph::resetResGraph(){
 int Graph::getN() const {
     return n;
 }
-
-
