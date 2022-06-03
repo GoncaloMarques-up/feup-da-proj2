@@ -17,6 +17,10 @@ class Graph {
         int dur;                // Duration of the Crossing
         int crtDur = 0;         // Current Duration of the Crossing
         int revCap;             // Capacity of the Reverse Edge
+        int es;
+        int lf;
+        int ef;
+        int ls;
     };
 
     struct Node {
@@ -28,6 +32,13 @@ class Graph {
         bool visited;           // Has the node already been visited?
         int tmax;               // Maximum time to get to the node
         int tmin;               // Minimum time to get to the node
+        int es;
+        int lf;
+        int ef;
+        int ls;
+        int grauE;
+        int grauS;
+
     };
 
     int n;                                  // Graph size (vertices are numbered from 1 to n)

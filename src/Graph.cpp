@@ -62,7 +62,6 @@ int Graph::calcPathTime(std::vector<int> v) {
             }
         }
     }
-    std::cout << time << "\n";
     return time;
 }
 
@@ -84,39 +83,103 @@ void Graph::cenario24() {
 }
 
 std::vector<int> Graph::bfs25(Graph* g){
+
     for (auto &it : g->nodes){
-        it.tmin = 0;
-        it.tmax = 0;
+        it.es = 0;
+        it.pred = -1;
+        it.grauE = 0;
+        it.ef = INT_MAX;
     }
-
-    for (int i =0;i<g->nodes.size()-1;i++){
-
-        for (auto it :g->nodes[i].adj){
-            int tmax = g->nodes[i].tmax+it.dur;
-            int tmin = g->nodes[i].tmin+it.dur;
-            if (g->nodes[it.dest].tmin == 0) g->nodes[it.dest].tmin = tmin;
-            if (g->nodes[it.dest].tmax == 0) g->nodes[it.dest].tmax = tmax;
-            if (tmax > g->nodes[it.dest].tmax){
-                g->nodes[it.dest].tmax = tmax;
-            }
-            if (tmin < g->nodes[it.dest].tmin){
-                g->nodes[it.dest].tmin = tmin;
-            }
-
+    for (auto it : g->nodes){
+        for (auto it2 : it.adj){
+            g->nodes[it2.dest].grauE +=1;
         }
     }
 
-    int time = INT_MIN;
+    std::queue<int> q;
     for (auto it :g->nodes){
-        if (it.tmax-it.tmin > time) time = it.tmax-it.tmin;
+        if (it.grauE ==0) q.push(it.index);
     }
+
+    int durMin = -1;
+
+    while (!q.empty()){
+        int v = q.front();
+        q.pop();
+        if (durMin < g->nodes[v].es){
+            durMin = g->nodes[v].es;
+        }
+        for (auto it :g->nodes[v].adj){
+            int dest = it.dest;
+            if (g->nodes[dest].es < g->nodes[v].es+ it.dur){
+                g->nodes[dest].es = g->nodes[v].es+ it.dur;
+                g->nodes[dest].pred = v;
+            }
+            g->nodes[dest].grauE -=1;
+            if (g->nodes[dest].grauE ==0) q.push(dest);
+        }
+    }
+
+    Graph* g2 =  new Graph(this->n);
+
+    for (int i =0;i<g->n;i++){
+        for (auto it2 : g->nodes[i].adj){
+            g2->addEdge(it2.dest,i,it2.cap,it2.dur);
+        }
+    }
+
+    for (auto &it : g2->nodes){
+        it.lf = durMin;
+        it.grauS = 0;
+    }
+    for (auto it : g2->nodes){
+        for (auto it2 : it.adj){
+            g2->nodes[it2.dest].grauS +=1;
+        }
+    }
+
+    for (int i =0;i<g2->n;i++){
+        if (g2->nodes[i].grauS ==0) q.push(i);
+    }
+
+    while (!q.empty()){
+        int v = q.front();
+        q.pop();
+        for (auto it : g2->nodes[v].adj){
+            int dest = it.dest;
+            if (g2->nodes[dest].lf > g2->nodes[v].lf - it.dur){
+                g2->nodes[dest].lf = g2->nodes[v].lf - it.dur;
+            }
+            g2->nodes[dest].grauS -=1;
+            if (g2->nodes[dest].grauS == 0) q.push(dest);
+        }
+    }
+
+    for (int i =0;i<g->n;i++){
+        g->nodes[i].lf = g2->nodes[i].lf;
+    }
+
+    int time =INT_MIN;
+
+    for (auto &it :g->nodes){
+        for (auto &it2 : it.adj){
+            it2.lf = g->nodes[it2.dest].lf;
+            it2.es =  it.es;
+            it2.ef = it2.es + it2.dur;
+            if (it2.ef < g->nodes[it2.dest].ef) g->nodes[it2.dest].ef = it2.ef;
+        }
+    }
+
+    for (auto it : g->nodes){
+        if (it.lf-it.ef> time) time =it.lf-it.ef;
+    }
+
     std::vector<int> v;
-    for (int i =0;i<g->nodes.size();i++){
-        if (g->nodes[i].tmax-g->nodes[i].tmin == time){
+    for (int i =0;i<g->n;i++){
+        if (time == g->nodes[i].lf-g->nodes[i].ef){
             v.push_back(i);
         }
     }
-
     return v;
 }
 
