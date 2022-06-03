@@ -78,12 +78,11 @@ void Menu::cenarios1() {
         switch (input) {
             case 1:
                 readInputNodes();
-                graph.maxCapacityPath(src);
-                graph.cenario1_1Output(src, sink);
+                graph.cenario11(src, sink);
                 break;
             case 2:
                 readInputNodes();
-                graph.maxCapacityAndShortestPath(src, sink);
+                graph.cenario12(src, sink);
                 break;
         }
     } while (input);

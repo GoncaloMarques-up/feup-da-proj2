@@ -15,9 +15,7 @@ class Graph {
         int cap;                // Maximum Capacity of an edge
         int dur;                // Duration of the Crossing
         int es;
-        int lf;
         int ef;
-        int ls;
     };
 
     struct Node {
@@ -29,7 +27,6 @@ class Graph {
         int es;
         int lf;
         int ef;
-        int ls;
         int grauE;
         int grauS;
     };
@@ -49,8 +46,8 @@ public:
     void addEdge(int src, int dest, int cap, int dur);
 
     void maxCapacityPath(int src);
-    void maxCapacityAndShortestPath(int src, int sink);
-    void cenario1_1Output(int src, int sink);
+    void cenario12(int src, int sink);
+    void cenario11(int src, int sink);
     void indexNode(int index);
     bool cenario1Bfs(int src, int sink);
 

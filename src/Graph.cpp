@@ -39,7 +39,7 @@ void Graph::maxCapacityPath(int src) {
 }
 
 
-void Graph::maxCapacityAndShortestPath(int src, int sink) {
+void Graph::cenario12(int src, int sink) {
     if (cenario1Bfs(src, sink)) {
         int mintransbordos = -1, transbordos = -1;
         int minCap = nodes[sink - 1].cap;
@@ -169,7 +169,9 @@ bool Graph::cenario1Bfs(int src, int sink) {
     return false;
 }
 
-void Graph::cenario1_1Output(int src, int sink) {
+void Graph::cenario11(int src, int sink) {
+    maxCapacityPath(src);
+
     std::vector<int> v;
     Node *node = &nodes[sink-1];
     while(node->index != src-1){
@@ -186,7 +188,7 @@ void Graph::cenario1_1Output(int src, int sink) {
         if(i != v.size()-1)
             std::cout << v[i] + 1 << "->";
         else
-            std::cout << v[i]+1 << "\n";
+            std::cout << v[i]+1 << "\n\n";
     }
 }
 
@@ -459,7 +461,6 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g) const{
 
     for (Node &node :g->nodes){
         for (Edge &edge : node.adj){
-            edge.lf = g->nodes[edge.dest].lf;
             edge.es =  node.es;
             edge.ef = edge.es + edge.dur;
             if (edge.ef < g->nodes[edge.dest].ef) g->nodes[edge.dest].ef = edge.ef;
