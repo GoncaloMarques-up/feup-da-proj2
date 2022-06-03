@@ -2,6 +2,7 @@
 // Created by ASUS on 22/05/2022.
 //
 
+#include <chrono>
 #include "../includes/Graph.h"
 
 Graph::Graph(int num) : n(num), nodes(num) {}
@@ -11,7 +12,7 @@ void Graph::addEdge(int src, int dest, int cap, int dur) {
 }
 
 void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
-    for(auto e: nodes[src].adj){
+    for(Edge e: nodes[src].adj){
         if(e.dest == dest){
             e.crtCap += addCapacity;
             e.crtDur += addDuration;
@@ -20,7 +21,7 @@ void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
 }
 
 void Graph::maxCapacityPath(int src, int sink) {
-    for(auto &node : nodes){
+    for(Node &node : nodes){
         node.cap = 0;
         node.pred = -1;
     }
@@ -79,7 +80,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
         std::reverse(path2.begin(), path2.end());
 
         if(numNodes == minNodes){
-            std::cout << "o caminho mais curto tem também maior capacidade.\n";
+            std::cout << "O caminho Mais Curto tem Tambem Maior Capacidade.\n";
             std::cout << "Capacidade:" << maxCap << "\n" << "Encaminhamento: ";
 
             for(int i = 0; i < path2.size(); i++){
@@ -90,7 +91,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
             }
         }
         else if(maxCap == bfsCap){
-            std::cout << "o caminho mais curto tem também maior capacidade.\n";
+            std::cout << "O Caminho Mais Curto tem Tambem Maior Capacidade.\n";
             std::cout << "Capacidade:" << maxCap << "\n" << "Encaminhamento: ";
 
             for(int i = 0; i < path1.size(); i++){
@@ -101,7 +102,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
             }
         }
         else {
-            std::cout << "Caminho de maior capacidade: ";
+            std::cout << "Caminho de Maior Capacidade: ";
             for(int i = 0; i < path2.size(); i++){
                 if(i != path2.size()-1)
                     std::cout << path2[i] + 1 << "->";
@@ -110,7 +111,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
             }
             std::cout << "Capacidade: " << maxCap << "\n\n";
 
-            std::cout  << "Caminho com menos transbordos: ";
+            std::cout  << "Caminho com Menos Transbordos: ";
             for(int i = 0; i < path1.size(); i++){
                 if(i != path1.size()-1)
                     std::cout << path1[i] + 1 << "->";
@@ -121,19 +122,18 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
         }
     }
     else{
-        std::cout << "não existe caminho entre os pontos selecionados";
+        std::cout << "Nao Existe Caminho Entre os Pontos Selecionados";
     }
 }
-
-
 
 void Graph::indexNode(int index) {
     nodes[index].index = index;
 }
 
 bool Graph::cenario1Bfs(int src, int sink) {
-    for(auto &node : nodes){
+    for(Node &node : nodes){
         node.cap = 0;
+        node.pred = -1;
     }
 
     nodes[src-1].visited = true;
@@ -145,7 +145,7 @@ bool Graph::cenario1Bfs(int src, int sink) {
     while (!queue.empty()){
         Node node = queue.front();
         queue.pop();
-        for(auto edge : node.adj){
+        for(Edge edge : node.adj){
             int min = std::min(node.cap, edge.cap);
             Node &dest = nodes[edge.dest];
             if(!dest.visited){
@@ -186,13 +186,13 @@ void Graph::cenario1_1Output(int src, int sink) {
 
 void Graph::cenario21(int src, int sink) {
     resetGraph();
-    maxFlow = 0;
 
     std::cout << "Introduza o Tamanho do Grupo\n";
     std::cin >> groupSize;
+    src21 = src-1; sink21 = sink-1;
 
-    maxFlow = edmondsKarp(src-1,sink-1);
-    if(!maxFlow) {
+    edmondsKarp(src21,sink21);
+    if(!maxFlow or !groupSize) {
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     }else if(maxFlow < groupSize){
         std::cout << "O Grupo e Maior do que o Suportado. Nao ha Caminhos.\n\n";
@@ -202,31 +202,37 @@ void Graph::cenario21(int src, int sink) {
 }
 
 void Graph::cenario22() {
-    if(maxFlow==0){
+    if(maxFlow==0 or groupSize ==0){
         std::cout << "Nenhum Caminho foi Selecionado\n\n";
     }
     else{
         int increment;
+        std::cout << "Numero Atual de Passageiros: " << groupSize << "\n";
         std::cout << "Introduza o Quantas Pessoas se vao Juntar ao Grupo\n";
         std::cin >> increment;
-        if(groupSize + increment > maxFlow)
+        groupSize+=increment;
+        edmondsKarp(src21, sink21);
+        if(groupSize > maxFlow){
             std::cout << "O Numero de Passageiros Excede o Maximo Possivel\n";
+            groupSize-=increment;
+        }
         else
-            drawPathsWithGroup(groupSize + increment);
+            drawPathsWithGroup(groupSize);
     }
 }
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
-    maxFlow = 0;
 
-    maxFlow = edmondsKarp(src-1,sink-1);
+    groupSize = INT_MAX;
+    edmondsKarp(src-1,sink-1);
     if(!maxFlow){
         std::cout << "Nao foi Encontrado um Caminho entre as Paragens que Especificou.\n\n";
     } else {
         drawPaths();
         std::cout << "Numero Maximo de Passageiros: " << maxFlow << "\n\n";
     }
+    resetGraph();
 }
 
 void Graph::cenario24() {
@@ -272,49 +278,58 @@ void Graph::cenario25() {
 
 }
 
-int Graph::edmondsKarp(int src, int sink){
+void Graph::edmondsKarp(int src, int sink){
+    int pathFlow;
 
-    std::vector<std::vector<int>>resGraph;
-    resGraph.resize(n, std::vector<int>(n));
-
-    for(int i = 0; i<n; i++){
-        for(auto e : nodes[i].adj){
-            resGraph[i][e.dest] = e.cap;
-        }
-    }
-
-    while(bfs(src, sink, resGraph)){
-
-        int pathFlow = INT_MAX;
-        for (int j = sink; j != src; j = nodes[j].pred) {
-            int i = nodes[j].pred;
-            pathFlow = std::min(pathFlow, resGraph[i][j]);
-        }
+    while((pathFlow = bfs(src, sink)) and maxFlow < groupSize){
 
         std::vector<int> newPath;
 
-        // update residual capacities of the edges and
-        // reverse edges along the path
-        for (int j = sink; j != src; j = nodes[j].pred) {
-            int i = nodes[j].pred;
-            resGraph[i][j] -= pathFlow;
-            /*resGraph[j][i] -= pathFlow;*/
-            newPath.push_back(j);
+        int cur = sink;
+        while (cur != src) {
+            int prev = nodes[cur].pred;
+            resGraph[prev][cur] -= pathFlow;
+            resGraph[cur][prev] += pathFlow;
+            newPath.push_back(cur);
+            cur = prev;
         }
+
         newPath.push_back(src);
         newPath.push_back(pathFlow);
+        std::reverse(newPath.begin(), newPath.end());
         paths.push_back(newPath);
 
-        // Add path flow to overall flow
         maxFlow += pathFlow;
     }
 
-    for(auto & path : paths){
-        std::reverse(path.begin(), path.end());
-    }
     std::sort(paths.begin(), paths.end(), comparePaths);
+}
 
-    return maxFlow;
+int Graph::bfs(int src, int sink){
+    for(Node &node : nodes){
+        node.visited= false;
+    }
+    std::queue<std::pair<int, int>> q;
+    nodes[src].visited = true;
+    q.push({src, INT_MAX});
+
+    while (!q.empty()) {
+        int cur = q.front().first;
+        int flow = q.front().second;
+        q.pop();
+
+        for (Edge edge: nodes[cur].adj) {
+            if (!nodes[edge.dest].visited && resGraph[cur][edge.dest]) {
+                nodes[edge.dest].pred = cur;
+                int newFlow = std::min(flow, resGraph[cur][edge.dest]);
+                if (edge.dest == sink) return newFlow;
+                q.push({edge.dest, newFlow});
+                nodes[edge.dest].visited = true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void Graph::drawPaths(){
@@ -345,6 +360,19 @@ void Graph::drawPathsWithGroup(int tamGrupo){
         tamGrupo -= paths[i][0];
         i++;
     }while(tamGrupo>0);
+}
+
+int Graph::calcPathTime(std::vector<int> v) {
+    int time=0;
+    for (int i =0;i<v.size()-1;i++){
+        for (auto it2 : nodes[v[i]].adj){
+            if (it2.dest == v[i+1]){
+                time += it2.dur;
+                break;
+            }
+        }
+    }
+    return time;
 }
 
 std::vector<int> Graph::bfs25(Graph* g){
@@ -448,59 +476,24 @@ std::vector<int> Graph::bfs25(Graph* g){
     return v;
 }
 
-int Graph::calcPathTime(std::vector<int> v) {
-    int time=0;
-    for (int i =1;i<v.size()-1;i++){
-        for (auto it2 : nodes[v[i]].adj){
-            if (it2.dest == v[i+1]){
-                time += it2.dur;
-                break;
-            }
-        }
-    }
-    return time;
-}
-
-
-
-
-
-
-
-
-
-
-
-bool Graph::bfs(int src, int sink, const std::vector<std::vector<int>> &resGraph){
-    std::queue<int> q;
-    q.push(src);
-    nodes[src].visited = true;
-
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-
-        for (int i = 0; i < n; i++) {
-            if (!nodes[i].visited && resGraph[u][i] > 0) {
-                if (i == sink) {
-                    nodes[i].pred = u;
-                    return true;
-                }
-                q.push(i);
-                nodes[i].pred = u;
-                nodes[src].visited = true;
-            }
-        }
-    }
-
-    return false;
-}
 
 void Graph::resetGraph() {
     for (int i=0; i<n; i++) {
         nodes[i].visited = false;
     }
+    resetResGraph();
+    maxFlow = 0;
     paths.clear();
+}
+
+void Graph::resetResGraph(){
+    resGraph.clear();
+    resGraph.resize(n, std::vector<int>(n));
+    for(int i = 0; i<n; i++){
+        for(Edge e : nodes[i].adj){
+            resGraph[i][e.dest] = e.cap;
+        }
+    }
 }
 
 int Graph::getN() const {
