@@ -40,83 +40,97 @@ void Graph::maxCapacityPath(int src) {
 
 
 void Graph::maxCapacityAndShortestPath(int src, int sink) {
-    if(cenario1Bfs(src, sink)){
-        int bfsCap = nodes[sink-1].cap;
-        int minNodes = 0;
-        std::vector<int> path1;
-        Node *node = &nodes[sink-1];
-        while(node->index != src-1){
-            path1.push_back(node->index);
-            minNodes++;
-            node = &nodes[node->pred];
+    if (cenario1Bfs(src, sink)) {
+        int mintransbordos = -1, transbordos = -1;
+        int minCap = nodes[sink - 1].cap;
+        int it = sink - 1;
+        while (it != src - 1) {
+            mintransbordos++;
+            it = nodes[it].pred;
         }
-        minNodes++;
-        path1.push_back(node->index);
-
-        std::reverse(path1.begin(), path1.end());
-
         maxCapacityPath(src);
-        int maxCap = nodes[sink-1].cap;
-        int numNodes = 0;
-
-        std::vector<int> path2;
-        node = &nodes[sink -1];
-        while(node->index != src-1){
-            path2.push_back(node->index);
-            numNodes++;
-            node = &nodes[node->pred];
+        int maxCap = nodes[sink - 1].cap;
+        it = sink - 1;
+        while (it != src - 1) {
+            transbordos++;
+            it = nodes[it].pred;
         }
-        numNodes++;
-        path2.push_back(node->index);
+        std::vector<int> shortPath, longPath;
 
-        std::reverse(path2.begin(), path2.end());
 
-        if(numNodes == minNodes){
-            std::cout << "O Caminho Mais Curto tem Tambem Maior Capacidade.\n";
-            std::cout << "Capacidade:" << maxCap << "\n" << "Encaminhamento: ";
+        paretoOtimos(src - 1, sink, mintransbordos, minCap, -1, INT_MAX, shortPath);
 
-            for(int i = 0; i < path2.size(); i++){
-                if(i != path2.size()-1)
-                    std::cout << path2[i] + 1 << "->";
-                else
-                    std::cout << path2[i]+1 << "\n";
+        paretoOtimos(src-1, sink, transbordos, maxCap, -1, INT_MAX, longPath);
+
+        if(shortPath == longPath){
+            std::reverse(shortPath.begin(), shortPath.end());
+            std::cout << "caminho com menos transbordos e maior capacidade (os pareto otimos são iguais): \n" << "capacidade: " << minCap << "\n" << "caminho: ";
+
+            for (int node: shortPath) {
+                std::cout << node;
+                if (node != sink)
+                    std::cout << " -> ";
             }
+            std::cout << "\n";
         }
-        else if(maxCap == bfsCap){
-            std::cout << "O Caminho Mais Curto tem Tambem Maior Capacidade.\n";
-            std::cout << "Capacidade:" << maxCap << "\n" << "Encaminhamento: ";
+        else{
+            std::reverse(shortPath.begin(), shortPath.end());
+            std::cout << "caminho com menos transbordos: \n" << "capacidade: " << minCap << "\n" << "caminho: ";
 
-            for(int i = 0; i < path1.size(); i++){
-                if(i != path1.size()-1)
-                    std::cout << path1[i] + 1 << "->";
-                else
-                    std::cout << path1[i]+1 << "\n";
+            for (int node: shortPath) {
+                std::cout << node;
+                if (node != sink)
+                    std::cout << " -> ";
             }
-        }
-        else {
-            std::cout << "Caminho de Maior Capacidade: ";
-            for(int i = 0; i < path2.size(); i++){
-                if(i != path2.size()-1)
-                    std::cout << path2[i] + 1 << "->";
-                else
-                    std::cout << path2[i]+1 << "\n";
-            }
-            std::cout << "Capacidade: " << maxCap << "\n\n";
+            std::cout << "\n numero de transbordos: " << mintransbordos << "\n";
 
-            std::cout  << "Caminho com Menos Transbordos: ";
-            for(int i = 0; i < path1.size(); i++){
-                if(i != path1.size()-1)
-                    std::cout << path1[i] + 1 << "->";
-                else
-                    std::cout << path1[i]+1 << "\n";
+            std::reverse(longPath.begin(), longPath.end());
+            std::cout << "caminho com maior capacidade: \n" << "capacidade: " << maxCap << "\n" << "caminho: ";
+
+            for (int node: longPath) {
+                std::cout << node;
+                if (node != sink)
+                    std::cout << " -> ";
             }
-            std::cout << "Capacidade: " << bfsCap << "\n\n";
+            std::cout << "\n numero de transbordos: " << transbordos << "\n\n";
         }
-    }
-    else{
-        std::cout << "Nao Existe Caminho Entre os Pontos Selecionados";
+    } else {
+        std::cout << "não existe caminho entre os nós " << src << " e " << sink << std::endl;
     }
 }
+
+int Graph::paretoOtimos(int curNode, int sink, int &transbordos, int &cap, int curTransbordos, int curCap, std::vector<int> &path){
+    if(curTransbordos == transbordos && curNode != sink-1){
+        return 0;
+    }
+
+    if(curNode == sink-1){
+        path.clear();
+        path.push_back(curNode+1);
+        if(curTransbordos < transbordos)
+            transbordos = curTransbordos;
+        return curCap;
+    }
+
+    int capacity;
+    bool foundPath = false;
+
+    for(Edge edge : nodes[curNode].adj){
+        if(edge.cap >= cap){
+            int dest = edge.dest;
+            capacity = paretoOtimos(dest, sink, transbordos, cap, curTransbordos+1, std::min(edge.cap, nodes[curNode].cap), path);
+            if(capacity){
+                if(capacity >= cap)
+                    cap = capacity;
+                path.push_back(curNode+1);
+                foundPath = true;
+            }
+        }
+    }
+
+    return foundPath ? cap : 0;
+}
+
 
 void Graph::indexNode(int index) {
     nodes[index].index = index;
@@ -178,7 +192,6 @@ void Graph::cenario1_1Output(int src, int sink) {
 
 void Graph::cenario21(int src, int sink) {
     resetGraph();
-    cen23 = false;
     std::cout << "Introduza o Tamanho do Grupo\n";
     std::cin >> groupSize;
     src21 = src-1; sink21 = sink-1;
@@ -194,7 +207,7 @@ void Graph::cenario21(int src, int sink) {
 }
 
 void Graph::cenario22() {
-    if(maxFlow==0 or groupSize ==0 or cen23){
+    if(maxFlow==0 or groupSize ==0){
         std::cout << "Nenhum Caminho foi Selecionado\n\n";
     }
     else{
@@ -215,7 +228,6 @@ void Graph::cenario22() {
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
-    cen23 = true;
     groupSize = INT_MAX;
     edmondsKarp(src-1,sink-1);
     if(!maxFlow){
