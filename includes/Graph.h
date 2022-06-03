@@ -43,8 +43,6 @@ class Graph {
     int groupSize{};                          // Group Size from 2.1 and 2.2
     int src21{};                              // Most Recent Source Node from 2.1
     int sink21{};                             // Most Recent Sink Node from 2.1
-    bool cen23{};                              // Is the resGraph  from Cenario 23?
-
 public:
     explicit Graph(int nodes);
 
@@ -84,6 +82,7 @@ public:
     void resetResGraph();
     void drawPaths();
     void drawPathsWithGroup(int groupSize);
+    int paretoOtimos(int curNode, int sink, int &transbordos, int &cap, int curTransbordos, int curCap, std::vector<int> &path);
     int getN() const;
 };
 
