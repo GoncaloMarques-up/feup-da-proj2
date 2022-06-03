@@ -94,7 +94,7 @@ void Menu::drawCenarios2() {
     std::cout << "1 - 2.1 - Determinar um Encaminhamento para um Grupo, com Dimensao Fixa\n";
     std::cout << "2 - 2.2 - Determinar um Encaminhamento para um Grupo, com Dimensao Flutuante\n";
     std::cout << "3 - 2.3 - Determinar a Dimensao Maxima do Grupo e um Encaminhamento\n";
-    std::cout << "4 - 2.4 - Determinar Quando e que o Grupo se Reuniria Novamente no Destino, no Mínimo.\n";
+    std::cout << "4 - 2.4 - Determinar Quando e que o Grupo se Reuniria Novamente no Destino, no Minimo.\n";
     std::cout << "5 - 2.5 - Indicar o Tempo Maximo de Espera e os Locais em que Haveria Elementos que Esperam Esse Tempo\n";
     std::cout << "0 - Sair\n\n";
 }

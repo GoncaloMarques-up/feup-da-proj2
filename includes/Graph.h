@@ -13,10 +13,7 @@ class Graph {
     struct Edge {
         int dest;               // Destination Node
         int cap;                // Maximum Capacity of an edge
-        int crtCap = 0;         // Current Capacity
         int dur;                // Duration of the Crossing
-        int crtDur = 0;         // Current Duration of the Crossing
-        int revCap;             // Capacity of the Reverse Edge
         int es;
         int lf;
         int ef;
@@ -25,20 +22,16 @@ class Graph {
 
     struct Node {
         std::list<Edge> adj;    // The list of outgoing edges (to adjacent nodes)
-        int dist;               // Distance to the Initial Node
         int cap;                // Capacity of a node(useful for 1.1 and 1.2)
         int pred;               // Predecessor Nodes
         int index;              // index of the Node in the vector
         bool visited;           // Has the node already been visited?
-        int tmax;               // Maximum time to get to the node
-        int tmin;               // Minimum time to get to the node
         int es;
         int lf;
         int ef;
         int ls;
         int grauE;
         int grauS;
-
     };
 
     int n;                                  // Graph size (vertices are numbered from 1 to n)
@@ -46,8 +39,8 @@ class Graph {
     std::vector<std::vector<int>>resGraph;  // Residual Graph
     std::vector<std::vector<int>> paths;    // Paths from src to sink
     int maxFlow;                            // Graph Max Flow
-    int groupSize;                          // Tamanho do Grupo
 
+    int groupSize;                          // Group Size from 2.1 and 2.2
     int src21;                              // Most Recent Source Node from 2.1
     int sink21;                             // Most Recent Sink Node from 2.1
 
@@ -55,7 +48,6 @@ public:
     explicit Graph(int nodes);
 
     void addEdge(int src, int dest, int cap, int dur);
-    void updateEdge(int src, int dest, int addCapacity, int addDuration);
 
     void maxCapacityPath(int src, int sink);
     void maxCapacityAndShortestPath(int src, int sink);

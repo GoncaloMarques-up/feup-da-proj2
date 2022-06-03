@@ -11,15 +11,6 @@ void Graph::addEdge(int src, int dest, int cap, int dur) {
     nodes[src].adj.push_back({dest, cap, 0, dur, 0});
 }
 
-void Graph::updateEdge(int src, int dest, int addCapacity, int addDuration){
-    for(Edge e: nodes[src].adj){
-        if(e.dest == dest){
-            e.crtCap += addCapacity;
-            e.crtDur += addDuration;
-        }
-    }
-}
-
 void Graph::maxCapacityPath(int src, int sink) {
     for(Node &node : nodes){
         node.cap = 0;
@@ -81,7 +72,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
         std::reverse(path2.begin(), path2.end());
 
         if(numNodes == minNodes){
-            std::cout << "O caminho Mais Curto tem Tambem Maior Capacidade.\n";
+            std::cout << "O Caminho Mais Curto tem Tambem Maior Capacidade.\n";
             std::cout << "Capacidade:" << maxCap << "\n" << "Encaminhamento: ";
 
             for(int i = 0; i < path2.size(); i++){
@@ -250,7 +241,7 @@ void Graph::cenario24() {
         if (it>max) max =it;
     }
     int res = max-min;
-    std::cout << "The last group arrive at the destination " << res << " minutes after the first \n";
+    std::cout << "O Ultimo Grupo Chega ao Destino " << res << " Minutos Depois de Partir\n";
 }
 
 void Graph::cenario25() {
@@ -269,7 +260,7 @@ void Graph::cenario25() {
 
     std::vector<int> res = cmp_arco_atividade(g);
 
-    std::cout << "The nodes where one group will wail the maximum time are: ";
+    std::cout << "Os Nos em que o Grupo vai Esperar o Tempo Maximo sao: ";
 
     for (auto it : res){
         std::cout << it+1 << " ";
