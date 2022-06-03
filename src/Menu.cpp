@@ -78,7 +78,7 @@ void Menu::cenarios1() {
         switch (input) {
             case 1:
                 readInputNodes();
-                graph.maxCapacityPath(src, sink);
+                graph.maxCapacityPath(src);
                 graph.cenario1_1Output(src, sink);
                 break;
             case 2:

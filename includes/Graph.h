@@ -38,18 +38,19 @@ class Graph {
     std::vector<Node> nodes;                // The list of nodes being represented
     std::vector<std::vector<int>>resGraph;  // Residual Graph
     std::vector<std::vector<int>> paths;    // Paths from src to sink
-    int maxFlow;                            // Graph Max Flow
+    int maxFlow{};                            // Graph Max Flow
 
-    int groupSize;                          // Group Size from 2.1 and 2.2
-    int src21;                              // Most Recent Source Node from 2.1
-    int sink21;                             // Most Recent Sink Node from 2.1
+    int groupSize{};                          // Group Size from 2.1 and 2.2
+    int src21{};                              // Most Recent Source Node from 2.1
+    int sink21{};                             // Most Recent Sink Node from 2.1
+    bool cen23{};                              // Is the resGraph  from Cenario 23?
 
 public:
     explicit Graph(int nodes);
 
     void addEdge(int src, int dest, int cap, int dur);
 
-    void maxCapacityPath(int src, int sink);
+    void maxCapacityPath(int src);
     void maxCapacityAndShortestPath(int src, int sink);
     void cenario1_1Output(int src, int sink);
     void indexNode(int index);
@@ -77,7 +78,7 @@ public:
     void cenario24();
     void cenario25();
     int calcPathTime(std::vector<int> v);
-    std::vector<int> cmp_arco_atividade(Graph* g);
+    std::vector<int> cmp_arco_atividade(Graph* g) const;
 
     void resetGraph();
     void resetResGraph();

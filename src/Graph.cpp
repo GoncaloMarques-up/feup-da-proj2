@@ -8,10 +8,10 @@
 Graph::Graph(int num) : n(num), nodes(num) {}
 
 void Graph::addEdge(int src, int dest, int cap, int dur) {
-    nodes[src].adj.push_back({dest, cap, 0, dur, 0});
+    nodes[src].adj.push_back({dest, cap, dur});
 }
 
-void Graph::maxCapacityPath(int src, int sink) {
+void Graph::maxCapacityPath(int src) {
     for(Node &node : nodes){
         node.cap = 0;
         node.pred = -1;
@@ -55,7 +55,7 @@ void Graph::maxCapacityAndShortestPath(int src, int sink) {
 
         std::reverse(path1.begin(), path1.end());
 
-        maxCapacityPath(src, sink);
+        maxCapacityPath(src);
         int maxCap = nodes[sink-1].cap;
         int numNodes = 0;
 
@@ -178,7 +178,7 @@ void Graph::cenario1_1Output(int src, int sink) {
 
 void Graph::cenario21(int src, int sink) {
     resetGraph();
-
+    cen23 = false;
     std::cout << "Introduza o Tamanho do Grupo\n";
     std::cin >> groupSize;
     src21 = src-1; sink21 = sink-1;
@@ -194,7 +194,7 @@ void Graph::cenario21(int src, int sink) {
 }
 
 void Graph::cenario22() {
-    if(maxFlow==0 or groupSize ==0){
+    if(maxFlow==0 or groupSize ==0 or cen23){
         std::cout << "Nenhum Caminho foi Selecionado\n\n";
     }
     else{
@@ -215,7 +215,7 @@ void Graph::cenario22() {
 
 void Graph::cenario23(int src, int sink) {
     resetGraph();
-
+    cen23 = true;
     groupSize = INT_MAX;
     edmondsKarp(src-1,sink-1);
     if(!maxFlow){
@@ -224,19 +224,18 @@ void Graph::cenario23(int src, int sink) {
         drawPaths();
         std::cout << "Numero Maximo de Passageiros: " << maxFlow << "\n\n";
     }
-    resetGraph();
 }
 
 void Graph::cenario24() {
     std::vector<int> times;
-    for (auto it : paths){
-        times.push_back(calcPathTime(it));
+    for (const std::vector<int>& path : paths){
+        times.push_back(calcPathTime(path));
     }
 
     int min = times[0];
     int max =times[0];
 
-    for (auto it : times){
+    for (int it : times){
         if (it<min) min =it;
         if (it>max) max =it;
     }
@@ -245,13 +244,13 @@ void Graph::cenario24() {
 }
 
 void Graph::cenario25() {
-    Graph* g = new Graph(this->n);
+    auto* g = new Graph(this->n);
 
-    for (auto it :paths){
-        for(int i =1;i<it.size()-1;i++){
-            for (auto it2 : nodes[it[i]].adj){
-                if (it2.dest == it[i+1]){
-                    g->addEdge(it[i],it[i+1],it2.cap,it2.dur);
+    for (std::vector<int> path :paths){
+        for(int i =1;i<path.size()-1;i++){
+            for (Edge edge : nodes[path[i]].adj){
+                if (edge.dest == path[i+1]){
+                    g->addEdge(path[i],path[i+1],edge.cap,edge.dur);
                     break;
                 }
             }
@@ -262,7 +261,7 @@ void Graph::cenario25() {
 
     std::cout << "Os Nos em que o Grupo vai Esperar o Tempo Maximo sao: ";
 
-    for (auto it : res){
+    for (int it : res){
         std::cout << it+1 << " ";
     }
 
@@ -356,10 +355,10 @@ void Graph::drawPathsWithGroup(int tamGrupo){
 
 int Graph::calcPathTime(std::vector<int> v) {
     int time=0;
-    for (int i =0;i<v.size()-1;i++){
-        for (auto it2 : nodes[v[i]].adj){
-            if (it2.dest == v[i+1]){
-                time += it2.dur;
+    for (int i =1;i<v.size()-1;i++){
+        for (Edge edge : nodes[v[i]].adj){
+            if (edge.dest == v[i+1]){
+                time += edge.dur;
                 break;
             }
         }
@@ -367,23 +366,23 @@ int Graph::calcPathTime(std::vector<int> v) {
     return time;
 }
 
-std::vector<int> Graph::cmp_arco_atividade(Graph* g){
+std::vector<int> Graph::cmp_arco_atividade(Graph* g) const{
 
-    for (auto &it : g->nodes){
-        it.es = 0;
-        it.pred = -1;
-        it.grauE = 0;
-        it.ef = INT_MAX;
+    for (Node &node : g->nodes){
+        node.es = 0;
+        node.pred = -1;
+        node.grauE = 0;
+        node.ef = INT_MAX;
     }
-    for (auto it : g->nodes){
-        for (auto it2 : it.adj){
-            g->nodes[it2.dest].grauE +=1;
+    for (Node &node : g->nodes){
+        for (Edge &edge : node.adj){
+            g->nodes[edge.dest].grauE +=1;
         }
     }
 
     std::queue<int> q;
-    for (auto it :g->nodes){
-        if (it.grauE ==0) q.push(it.index);
+    for (const Node& node :g->nodes){
+        if (node.grauE ==0) q.push(node.index);
     }
 
     int durMin = -1;
@@ -394,10 +393,10 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g){
         if (durMin < g->nodes[v].es){
             durMin = g->nodes[v].es;
         }
-        for (auto it :g->nodes[v].adj){
-            int dest = it.dest;
-            if (g->nodes[dest].es < g->nodes[v].es+ it.dur){
-                g->nodes[dest].es = g->nodes[v].es+ it.dur;
+        for (Edge edge :g->nodes[v].adj){
+            int dest = edge.dest;
+            if (g->nodes[dest].es < g->nodes[v].es+ edge.dur){
+                g->nodes[dest].es = g->nodes[v].es+ edge.dur;
                 g->nodes[dest].pred = v;
             }
             g->nodes[dest].grauE -=1;
@@ -405,21 +404,21 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g){
         }
     }
 
-    Graph* g2 =  new Graph(this->n);
+    auto* g2 =  new Graph(this->n);
 
     for (int i =0;i<g->n;i++){
-        for (auto it2 : g->nodes[i].adj){
-            g2->addEdge(it2.dest,i,it2.cap,it2.dur);
+        for (Edge edge : g->nodes[i].adj){
+            g2->addEdge(edge.dest,i,edge.cap,edge.dur);
         }
     }
 
-    for (auto &it : g2->nodes){
-        it.lf = durMin;
-        it.grauS = 0;
+    for (Node &node : g2->nodes){
+        node.lf = durMin;
+        node.grauS = 0;
     }
-    for (auto it : g2->nodes){
-        for (auto it2 : it.adj){
-            g2->nodes[it2.dest].grauS +=1;
+    for (Node &node : g2->nodes){
+        for (Edge &edge : node.adj){
+            g2->nodes[edge.dest].grauS +=1;
         }
     }
 
@@ -430,10 +429,10 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g){
     while (!q.empty()){
         int v = q.front();
         q.pop();
-        for (auto it : g2->nodes[v].adj){
-            int dest = it.dest;
-            if (g2->nodes[dest].lf > g2->nodes[v].lf - it.dur){
-                g2->nodes[dest].lf = g2->nodes[v].lf - it.dur;
+        for (Edge edge : g2->nodes[v].adj){
+            int dest = edge.dest;
+            if (g2->nodes[dest].lf > g2->nodes[v].lf - edge.dur){
+                g2->nodes[dest].lf = g2->nodes[v].lf - edge.dur;
             }
             g2->nodes[dest].grauS -=1;
             if (g2->nodes[dest].grauS == 0) q.push(dest);
@@ -446,17 +445,17 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g){
 
     int time =INT_MIN;
 
-    for (auto &it :g->nodes){
-        for (auto &it2 : it.adj){
-            it2.lf = g->nodes[it2.dest].lf;
-            it2.es =  it.es;
-            it2.ef = it2.es + it2.dur;
-            if (it2.ef < g->nodes[it2.dest].ef) g->nodes[it2.dest].ef = it2.ef;
+    for (Node &node :g->nodes){
+        for (Edge &edge : node.adj){
+            edge.lf = g->nodes[edge.dest].lf;
+            edge.es =  node.es;
+            edge.ef = edge.es + edge.dur;
+            if (edge.ef < g->nodes[edge.dest].ef) g->nodes[edge.dest].ef = edge.ef;
         }
     }
 
-    for (auto it : g->nodes){
-        if (it.lf-it.ef> time) time =it.lf-it.ef;
+    for (const Node& node : g->nodes){
+        if (node.lf-node.ef> time) time =node.lf-node.ef;
     }
 
     std::vector<int> v;
