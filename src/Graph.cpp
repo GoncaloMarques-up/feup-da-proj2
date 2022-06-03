@@ -134,6 +134,7 @@ void Graph::indexNode(int index) {
 bool Graph::cenario1Bfs(int src, int sink) {
     for(Node &node : nodes){
         node.cap = 0;
+        node.pred = -1;
     }
 
     nodes[src-1].visited = true;
