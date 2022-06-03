@@ -121,7 +121,7 @@ void Menu::cenarios2() {
                 graph.cenario24();
                 break;
             case 5:
-                //cenario2();
+                graph.cenario25();
                 break;
         }
     } while (input);
