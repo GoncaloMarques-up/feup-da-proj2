@@ -57,8 +57,15 @@ void Graph::cenario12(int src, int sink) {
         }
         std::vector<int> shortPath, longPath;
 
+        for(Node &node : nodes){
+            node.visited = false;
+        }
 
         paretoOtimos(src - 1, sink, mintransbordos, minCap, -1, INT_MAX, shortPath);
+
+        for(Node &node : nodes){
+            node.visited = false;
+        }
 
         paretoOtimos(src-1, sink, transbordos, maxCap, -1, INT_MAX, longPath);
 
@@ -100,7 +107,7 @@ void Graph::cenario12(int src, int sink) {
 }
 
 int Graph::paretoOtimos(int curNode, int sink, int &transbordos, int &cap, int curTransbordos, int curCap, std::vector<int> &path){
-    if(curTransbordos == transbordos && curNode != sink-1){
+    if((curTransbordos == transbordos && curNode != sink-1) || nodes[curNode].visited){
         return 0;
     }
 
@@ -114,6 +121,7 @@ int Graph::paretoOtimos(int curNode, int sink, int &transbordos, int &cap, int c
 
     int capacity;
     bool foundPath = false;
+    int count = 0;
 
     for(Edge edge : nodes[curNode].adj){
         if(edge.cap >= cap){
@@ -126,7 +134,12 @@ int Graph::paretoOtimos(int curNode, int sink, int &transbordos, int &cap, int c
                 foundPath = true;
             }
         }
+        else{
+            count++;
+        }
     }
+    if(count == nodes[curNode].adj.size())
+        nodes[curNode].visited = true;
 
     return foundPath ? cap : 0;
 }
