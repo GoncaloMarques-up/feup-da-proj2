@@ -273,10 +273,10 @@ void Graph::cenario25() {
 
     std::vector<int> res = cmp_arco_atividade(g);
 
-    std::cout << "Os Nos em que o Grupo vai Esperar o Tempo Maximo sao: ";
+    std::cout << "O tempo máximo que um dos gurpos vai esperar é: " << res[0] << " minutos nos nós: ";
 
-    for (int it : res){
-        std::cout << it+1 << " ";
+    for (int i =1;i<res.size();i++){
+        std::cout << res[i]+1 << " ";
     }
 
     std::cout << "\n";
@@ -472,6 +472,7 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g) const{
     }
 
     std::vector<int> v;
+    v.push_back(time);
     for (int i =0;i<g->n;i++){
         if (time == g->nodes[i].lf-g->nodes[i].ef){
             v.push_back(i);
