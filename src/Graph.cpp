@@ -267,11 +267,15 @@ void Graph::cenario24() {
         if (it>max) max =it;
     }
     int res = max-min;
-    std::cout << "O Ultimo Grupo Chega ao Destino " << res << " Minutos Depois de Partir\n";
+    std::cout << "O Ultimo Grupo Chega ao Destino " << res << " Minutos Depois do Primeiro\n";
 }
 
 void Graph::cenario25() {
     auto* g = new Graph(this->n);
+
+    for (int i =0;i<g->n;i++){
+        g->indexNode(i);
+    }
 
     for (std::vector<int> path :paths){
         for(int i =1;i<path.size()-1;i++){
@@ -404,6 +408,12 @@ std::vector<int> Graph::cmp_arco_atividade(Graph* g) const{
     for (Node &node : g->nodes){
         for (Edge &edge : node.adj){
             g->nodes[edge.dest].grauE +=1;
+        }
+    }
+
+    for (Node &node : g->nodes){
+        if (node.grauE == 0 && node.index != paths[0][1]){
+            node.grauE = -1;
         }
     }
 
