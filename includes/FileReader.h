@@ -13,6 +13,11 @@ class FileReader {
     public:
     FileReader();
 
+    /**
+     * function that reads a file
+     * @param file
+     * @return a graph with the contents of the file
+     */
     static Graph readFile(const std::string& file);
 };
 
