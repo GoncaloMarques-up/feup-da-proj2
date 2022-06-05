@@ -1,0 +1,18 @@
+<map id="Menu::mainMenu" name="Menu::mainMenu">
+<area shape="rect" id="node1" title=" " alt="" coords="5,233,128,260"/>
+<area shape="rect" id="node2" href="$class_menu.html#a17ce9ecf843bc1f3d84c17b81797095a" title=" " alt="" coords="195,81,306,108"/>
+<area shape="rect" id="node8" href="$class_menu.html#afd76e693a6ed34a3b2293ef2b6c5e6b1" title=" " alt="" coords="188,183,313,209"/>
+<area shape="rect" id="node12" href="$class_menu.html#ae819a32ac62a189a1930b6a83ee7c20b" title=" " alt="" coords="194,233,307,260"/>
+<area shape="rect" id="node14" href="$class_menu.html#a025bb8d3b75a37e15cf4a0f8794f034b" title=" " alt="" coords="176,284,325,311"/>
+<area shape="rect" id="node15" href="$class_menu.html#a2133e7b9564fda512ed9a120b035ed8a" title=" " alt="" coords="209,335,292,361"/>
+<area shape="rect" id="node3" href="$class_menu.html#ab870014d64db1cb32cf916bee1357357" title=" " alt="" coords="393,5,512,32"/>
+<area shape="rect" id="node5" href="$class_menu.html#adc732734e1d632f8de73b4b44b4e2475" title=" " alt="" coords="393,56,512,83"/>
+<area shape="rect" id="node7" href="$class_menu.html#a8cf14a464d0ef4fd4398193dd2bee399" title=" " alt="" coords="383,107,523,133"/>
+<area shape="rect" id="node4" href="$class_menu.html#a8bc95527dac2e416c4a00213b0a01c97" title=" " alt="" coords="580,5,727,32"/>
+<area shape="rect" id="node6" href="$class_menu.html#aa4b73302eaa8b511250094f3dec3475f" title=" " alt="" coords="580,56,727,83"/>
+<area shape="rect" id="node9" href="$class_menu.html#a3dfc88e0c979e92617b919a4b41c8ae0" title=" " alt="" coords="373,157,532,184"/>
+<area shape="rect" id="node10" href="$class_file_reader.html#a43eb180196898bc81d096861cc74bc70" title=" " alt="" coords="383,208,522,235"/>
+<area shape="rect" id="node11" href="$class_graph.html#a08a90885b7bf1a995abfef99207b7b1d" title=" " alt="" coords="590,208,717,235"/>
+<area shape="rect" id="node13" href="$class_menu.html#a818eb6182bde037a4175d32e1b6e0343" title=" " alt="" coords="381,259,524,285"/>
+<area shape="rect" id="node16" href="$class_menu.html#a22040f9371b06cefed887d8bf19e8d75" title=" " alt="" coords="397,335,509,361"/>
+</map>
