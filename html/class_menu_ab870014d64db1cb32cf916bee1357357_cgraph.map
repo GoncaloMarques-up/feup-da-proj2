@@ -1,4 +1,11 @@
 <map id="Menu::cenarios1" name="Menu::cenarios1">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,124,32"/>
-<area shape="rect" id="node2" href="$class_menu.html#a8bc95527dac2e416c4a00213b0a01c97" title=" " alt="" coords="172,5,319,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,124,108"/>
+<area shape="rect" id="node2" href="$class_graph.html#a6594a9fcd93c364d91a3623d03fcdc71" title=" " alt="" coords="187,5,309,32"/>
+<area shape="rect" id="node4" href="$class_graph.html#a50404c07ac9b3327258f8df051c4283d" title=" " alt="" coords="187,56,309,83"/>
+<area shape="rect" id="node7" href="$class_menu.html#a8bc95527dac2e416c4a00213b0a01c97" title=" " alt="" coords="175,107,321,133"/>
+<area shape="rect" id="node8" href="$class_menu.html#aa84927d040f4c50174119aa2b3be5776" title=" " alt="" coords="172,169,324,196"/>
+<area shape="rect" id="node3" href="$class_graph.html#a8a6b2e960011ba4ef5dcc6bb6d4daabe" title=" " alt="" coords="372,5,540,32"/>
+<area shape="rect" id="node5" href="$class_graph.html#a766d4ba78195c9301d329d244674a9c7" title=" " alt="" coords="389,56,523,83"/>
+<area shape="rect" id="node6" href="$class_graph.html#a6bd12c1b32922cf5beab5648e7af3831" title=" " alt="" coords="385,131,527,157"/>
+<area shape="rect" id="node9" href="$class_graph.html#a87f86a985da5551dca0e85b8426b22d9" title=" " alt="" coords="410,181,502,208"/>
 </map>

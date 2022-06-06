@@ -1,8 +1,29 @@
 <map id="Menu::cenarios" name="Menu::cenarios">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,116,83"/>
-<area shape="rect" id="node2" href="$class_menu.html#ab870014d64db1cb32cf916bee1357357" title=" " alt="" coords="175,5,293,32"/>
-<area shape="rect" id="node4" href="$class_menu.html#adc732734e1d632f8de73b4b44b4e2475" title=" " alt="" coords="175,56,293,83"/>
-<area shape="rect" id="node6" href="$class_menu.html#a8cf14a464d0ef4fd4398193dd2bee399" title=" " alt="" coords="164,107,304,133"/>
-<area shape="rect" id="node3" href="$class_menu.html#a8bc95527dac2e416c4a00213b0a01c97" title=" " alt="" coords="352,5,499,32"/>
-<area shape="rect" id="node5" href="$class_menu.html#aa4b73302eaa8b511250094f3dec3475f" title=" " alt="" coords="352,56,499,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,308,116,335"/>
+<area shape="rect" id="node2" href="$class_menu.html#ab870014d64db1cb32cf916bee1357357" title=" " alt="" coords="175,131,293,157"/>
+<area shape="rect" id="node11" href="$class_menu.html#adc732734e1d632f8de73b4b44b4e2475" title=" " alt="" coords="175,308,293,335"/>
+<area shape="rect" id="node27" href="$class_menu.html#a8cf14a464d0ef4fd4398193dd2bee399" title=" " alt="" coords="164,359,304,385"/>
+<area shape="rect" id="node3" href="$class_graph.html#a6594a9fcd93c364d91a3623d03fcdc71" title=" " alt="" coords="367,17,489,44"/>
+<area shape="rect" id="node5" href="$class_graph.html#a50404c07ac9b3327258f8df051c4283d" title=" " alt="" coords="367,80,489,107"/>
+<area shape="rect" id="node8" href="$class_menu.html#a8bc95527dac2e416c4a00213b0a01c97" title=" " alt="" coords="355,131,501,157"/>
+<area shape="rect" id="node9" href="$class_menu.html#aa84927d040f4c50174119aa2b3be5776" title=" " alt="" coords="352,181,504,208"/>
+<area shape="rect" id="node4" href="$class_graph.html#a8a6b2e960011ba4ef5dcc6bb6d4daabe" title=" " alt="" coords="562,5,730,32"/>
+<area shape="rect" id="node6" href="$class_graph.html#a766d4ba78195c9301d329d244674a9c7" title=" " alt="" coords="579,131,713,157"/>
+<area shape="rect" id="node7" href="$class_graph.html#a6bd12c1b32922cf5beab5648e7af3831" title=" " alt="" coords="575,80,717,107"/>
+<area shape="rect" id="node10" href="$class_graph.html#a87f86a985da5551dca0e85b8426b22d9" title=" " alt="" coords="600,181,692,208"/>
+<area shape="rect" id="node12" href="$class_graph.html#ae994c17f1c3dc39b1b745d27dde9eba0" title=" " alt="" coords="367,283,489,309"/>
+<area shape="rect" id="node19" href="$class_graph.html#ab205b088fd76a2660a4e164036f45268" title=" " alt="" coords="367,232,489,259"/>
+<area shape="rect" id="node20" href="$class_graph.html#a8b3aaf376a19a694b4c780ed0aa86767" title=" " alt="" coords="367,333,489,360"/>
+<area shape="rect" id="node22" href="$class_graph.html#a6d0c3c79d0e6f43fbd132d3d74579ab0" title=" " alt="" coords="367,384,489,411"/>
+<area shape="rect" id="node24" href="$class_graph.html#ae355cbe852293b9c7fa99bba41f3ad02" title=" " alt="" coords="367,435,489,461"/>
+<area shape="rect" id="node26" href="$class_menu.html#aa4b73302eaa8b511250094f3dec3475f" title=" " alt="" coords="355,485,501,512"/>
+<area shape="rect" id="node13" href="$class_graph.html#aa2eaf9d6fb8fbaaa2bd50fb29e995ee1" title=" " alt="" coords="552,232,740,259"/>
+<area shape="rect" id="node14" href="$class_graph.html#a206e9379349b771f9d3a580df27f959e" title=" " alt="" coords="573,283,719,309"/>
+<area shape="rect" id="node17" href="$class_graph.html#aeca239012103ede21f7cc2cf2976c3a5" title=" " alt="" coords="581,333,711,360"/>
+<area shape="rect" id="node15" href="$class_graph.html#a5fc7885ec62cee90ba7f7fd59a7459df" title=" " alt="" coords="823,232,905,259"/>
+<area shape="rect" id="node16" href="$class_graph.html#ad814a7fef70841f1babd9f3f79175965" title=" " alt="" coords="789,283,939,309"/>
+<area shape="rect" id="node18" href="$class_graph.html#abe85cce1b7b725c7b69c3d87230ad2de" title=" " alt="" coords="788,333,940,360"/>
+<area shape="rect" id="node21" href="$class_graph.html#a6ea6df897144b5797d4c344aa4f13288" title=" " alt="" coords="583,384,709,411"/>
+<area shape="rect" id="node23" href="$class_graph.html#afb9044bb0cf9c2d280790931e5baa3c8" title=" " alt="" coords="574,435,718,461"/>
+<area shape="rect" id="node25" href="$class_graph.html#a284b99bdb07994225dee3c2cdb59c80a" title=" " alt="" coords="596,485,696,512"/>
 </map>

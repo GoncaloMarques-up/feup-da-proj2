@@ -1,4 +1,12 @@
 <map id="Graph::bfs" name="Graph::bfs">
-<area shape="rect" id="node1" title=" " alt="" coords="199,5,281,32"/>
-<area shape="rect" id="node2" href="$class_graph.html#a206e9379349b771f9d3a580df27f959e" title=" " alt="" coords="5,5,151,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1091,56,1173,83"/>
+<area shape="rect" id="node2" href="$class_graph.html#a206e9379349b771f9d3a580df27f959e" title=" " alt="" coords="897,56,1043,83"/>
+<area shape="rect" id="node3" href="$class_graph.html#ae994c17f1c3dc39b1b745d27dde9eba0" title=" " alt="" coords="728,5,849,32"/>
+<area shape="rect" id="node9" href="$class_graph.html#ab205b088fd76a2660a4e164036f45268" title=" " alt="" coords="728,56,849,83"/>
+<area shape="rect" id="node10" href="$class_graph.html#a8b3aaf376a19a694b4c780ed0aa86767" title=" " alt="" coords="728,107,849,133"/>
+<area shape="rect" id="node4" href="$class_menu.html#adc732734e1d632f8de73b4b44b4e2475" title=" " alt="" coords="561,56,680,83"/>
+<area shape="rect" id="node5" href="$class_menu.html#a17ce9ecf843bc1f3d84c17b81797095a" title=" " alt="" coords="403,56,513,83"/>
+<area shape="rect" id="node6" href="$class_menu.html#aef9edee86d2ea460606361c92e061583" title=" " alt="" coords="232,56,355,83"/>
+<area shape="rect" id="node7" href="$class_menu.html#a35656cd130e24d69383a5c9d0a73a38c" title=" " alt="" coords="104,56,184,83"/>
+<area shape="rect" id="node8" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,56,56,83"/>
 </map>

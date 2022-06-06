@@ -1,6 +1,7 @@
 <map id="Menu::drawDevTeam" name="Menu::drawDevTeam">
-<area shape="rect" id="node1" title=" " alt="" coords="465,5,608,32"/>
-<area shape="rect" id="node2" href="$class_menu.html#ae819a32ac62a189a1930b6a83ee7c20b" title=" " alt="" coords="304,5,417,32"/>
-<area shape="rect" id="node3" href="$class_menu.html#aef9edee86d2ea460606361c92e061583" title=" " alt="" coords="133,5,256,32"/>
-<area shape="rect" id="node4" href="$class_menu.html#a35656cd130e24d69383a5c9d0a73a38c" title=" " alt="" coords="5,5,85,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="564,5,707,32"/>
+<area shape="rect" id="node2" href="$class_menu.html#ae819a32ac62a189a1930b6a83ee7c20b" title=" " alt="" coords="403,5,516,32"/>
+<area shape="rect" id="node3" href="$class_menu.html#aef9edee86d2ea460606361c92e061583" title=" " alt="" coords="232,5,355,32"/>
+<area shape="rect" id="node4" href="$class_menu.html#a35656cd130e24d69383a5c9d0a73a38c" title=" " alt="" coords="104,5,184,32"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,56,32"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['paretootimos_0',['paretoOtimos',['../class_graph.html#a6bd12c1b32922cf5beab5648e7af3831',1,'Graph']]]
+  ['indexnode_0',['indexNode',['../class_graph.html#a08a90885b7bf1a995abfef99207b7b1d',1,'Graph']]]
 ];
