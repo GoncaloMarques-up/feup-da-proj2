@@ -146,13 +146,13 @@ public:
     void drawPaths();
 
     /**
-     * function that draws the contents of vector paths with numbered groups
+     * function that draws the contents of vector paths with numbered groups and group size
      * @param groupSize
      */
     void drawPathsWithGroup(int groupSize);
 
     /**
-     * function that calculates the optimal paretos of a path
+     * function that calculates the pareto-optimal paths
      * @param curNode
      * @param sink
      * @param transbordos
