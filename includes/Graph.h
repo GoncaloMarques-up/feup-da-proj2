@@ -68,10 +68,10 @@ public:
     void indexNode(int index);
 
     /**
-     * functions that implementes a variation of bfs that takes in to account the capacity of the edges
+     * functions that implements a variation of bfs that also stores the nodes' capacity
      * @param src
      * @param sink
-     * @return
+     * @return true if there is a path from src to sink and false otherwise
      */
     bool cenario1Bfs(int src, int sink);
 
@@ -90,7 +90,7 @@ public:
      * function that implements the bfs algorithm
      * @param src
      * @param sink
-     * @return true if there is a path from src to sink and flase otherwise
+     * @return true if there is a path from src to sink and false otherwise
      */
     int bfs(int src, int sink);
 
@@ -105,7 +105,7 @@ public:
      * function that compares path a and b
      * @param a
      * @param b
-     * @return returns true if the first element of the vectors and the size of the vectors are the same or if the first element of vector a is bigger than the first element of vector b and flase otherwise
+     * @return returns true if the first element of the vectors(capacity) and the size of the vectors are the same or if the first element of vector a is bigger than the first element of vector b and false otherwise
      */
     static bool comparePaths(const std::vector<int> &a, std::vector<int> &b){
         if(b[0] == a[0])
@@ -117,18 +117,18 @@ public:
     void cenario25();
 
     /**
-     * function that calculates the time of a path
+     * function that calculates the time it takes to go through a path
      * @param v
      * @return the sum of the duration of all the edges in the path
      */
     int calcPathTime(std::vector<int> v);
 
     /**
-     * function that implements a variation of the algorithms cmp earliest start and cmp latest finish
+     * function that implements a variation of the algorithms cpm earliest start and cpm latest finish
      * @param g
      * @return a vector in witch the first element is the biggest difference between the ef and lf of all nodes and the following elements the index of the nodes with this value
      */
-    std::vector<int> cmp_arco_atividade(Graph* g) const;
+    std::vector<int> cpm_arco_atividade(Graph* g) const;
 
     /**
      * function that resets resGraph puts maxFlow =0 and clears the vector pahts
@@ -136,17 +136,17 @@ public:
     void resetGraph();
 
     /**
-     * function that resets resGraph
+     * function that resets the residual graph matrix
      */
     void resetResGraph();
 
     /**
-     * function that draws the paths in paths
+     * function that draws the contents of vector paths
      */
     void drawPaths();
 
     /**
-     * function that draws the paths in paths with the groups
+     * function that draws the contents of vector paths with numbered groups
      * @param groupSize
      */
     void drawPathsWithGroup(int groupSize);
