@@ -391,7 +391,7 @@ int Graph::calcPathTime(std::vector<int> v) {
     return time;
 }
 
-std::vector<int> Graph::cmp_arco_atividade(Graph* g) const{
+std::vector<int> Graph::cpm_arco_atividade(Graph* g) const{
 
     for (Node &node : g->nodes){
         node.es = 0;
