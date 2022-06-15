@@ -282,7 +282,7 @@ void Graph::cenario25() {
         }
     }
 
-    std::vector<int> res = cmp_arco_atividade(g);
+    std::vector<int> res = cpm_arco_atividade(g);
 
     std::cout << "O tempo máximo que um dos gurpos vai esperar é: " << res[0] << " minutos nos nós: ";
 
